@@ -196,7 +196,8 @@ abstract class ReflectionEnum implements Enum, \Serializable
             foreach ($constants as $constant => $constant_value) {
                 self::$keys[static::class][$constant] = $constant_value;
 
-                $constant = str_replace('_', '', ucwords(strtolower($constant), '_'));
+                // second parameter of ucwords() is not supported on HHVM
+                $constant = str_replace(' ', '', ucwords(str_replace('_', ' ', strtolower($constant))));
 
                 self::$is_methods[static::class]['is'.$constant] = $constant_value;
                 self::$create_methods[static::class][lcfirst($constant)] = $constant_value;
