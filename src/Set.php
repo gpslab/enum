@@ -106,7 +106,7 @@ class Set
      */
     public static function isValid($value)
     {
-        return in_array($value, static::bits(), true);
+        return in_array($value, self::bits(), true);
     }
 
     /**
@@ -253,7 +253,7 @@ class Set
      */
     public static function choices()
     {
-        static::detectConstants();
+        self::detectConstants();
 
         $choices = [];
         foreach (self::$keys[static::class] as $value) {
@@ -286,7 +286,7 @@ class Set
     }
 
     /**
-     * @param string $object
+     * @param object $object
      */
     private static function validateType($object)
     {
@@ -342,7 +342,7 @@ class Set
      */
     private static function bits()
     {
-        static::detectConstants();
+        self::detectConstants();
 
         return self::$bits[static::class];
     }
