@@ -8,7 +8,7 @@
  * @license   http://opensource.org/licenses/MIT
  */
 
-namespace GpsLab\Component\Enum\Tests\Enum;
+namespace GpsLab\Component\Enum\Tests\Enum\Rival;
 
 use HappyTypes\EnumerableType;
 

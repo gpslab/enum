@@ -11,9 +11,9 @@
 require 'bootstrap.php';
 
 use GpsLab\Component\Enum\Tests\Enum\AbcExp;
-use GpsLab\Component\Enum\Tests\Enum\AbcHappyTypes;
-use GpsLab\Component\Enum\Tests\Enum\AbcMyClabs;
-use GpsLab\Component\Enum\Tests\Enum\AbcMarcMabe;
+use GpsLab\Component\Enum\Tests\Enum\Rival\AbcHappyTypes;
+use GpsLab\Component\Enum\Tests\Enum\Rival\AbcMyClabs;
+use GpsLab\Component\Enum\Tests\Enum\Rival\AbcMarcMabe;
 use GpsLab\Component\Enum\Tests\Enum\AbcRef;
 use GpsLab\Component\Enum\Tests\Enum\DefRef;
 use Symfony\Component\Stopwatch\Stopwatch;
