@@ -23,17 +23,17 @@ class Set
     /**
      * @var mixed[][]
      */
-    private static $bits = [];
+    private static $bits = array();
 
     /**
      * @var mixed[][]
      */
-    private static $keys = [];
+    private static $keys = array();
 
     /**
      * @param array $values
      */
-    public function __construct(array $values = [])
+    public function __construct(array $values = array())
     {
         foreach ($values as $value) {
             $this->attach($value);
@@ -46,11 +46,11 @@ class Set
     public function values()
     {
         if (!$this->bit) {
-            return [];
+            return array();
         }
 
-        $values = [];
-        foreach (self::$bits[static::class] as $bit => $value) {
+        $values = array();
+        foreach (self::$bits[get_called_class()] as $bit => $value) {
             if ($this->bit & $bit) {
                 $values[] = $value;
             }
@@ -253,10 +253,10 @@ class Set
      */
     public static function choices()
     {
-        self::detectConstants();
+        self::detectConstants(get_called_class());
 
-        $choices = [];
-        foreach (self::$keys[static::class] as $value) {
+        $choices = array();
+        foreach (self::$keys[get_called_class()] as $value) {
             $choices[$value] = static::readable($value);
         }
 
@@ -272,7 +272,7 @@ class Set
     {
         self::validateValue($value);
 
-        return array_search($value, self::$keys[static::class]);
+        return array_search($value, self::$keys[get_called_class()]);
     }
 
     /**
@@ -281,7 +281,7 @@ class Set
     private static function validateValue($value)
     {
         if (!static::isValid($value)) {
-            throw OutOfEnumException::create($value, static::class);
+            throw OutOfEnumException::create($value, get_called_class());
         }
     }
 
@@ -290,18 +290,23 @@ class Set
      */
     private static function validateType($object)
     {
-        if (self::class !== get_class($object)) {
-            throw InvalidSetException::notInstanceOf(self::class, get_class($object));
+        $class = get_called_class();
+
+        if ($class !== get_class($object)) {
+            throw InvalidSetException::notInstanceOf($class, get_class($object));
         }
     }
 
-    private static function detectConstants()
+    /**
+     * @param string $class
+     */
+    private static function detectConstants($class)
     {
-        if (!isset(self::$bits[static::class])) {
-            self::$keys[static::class] = [];
-            self::$bits[static::class] = [];
-            $constants = [];
-            $reflection = new \ReflectionClass(static::class);
+        if (!isset(self::$bits[$class])) {
+            self::$keys[$class] = array();
+            self::$bits[$class] = array();
+            $constants = array();
+            $reflection = new \ReflectionClass($class);
 
             if (PHP_VERSION_ID >= 70100) {
                 // Since PHP-7.1 visibility modifiers are allowed for class constants
@@ -320,8 +325,8 @@ class Set
 
             $bit = 1;
             foreach ($constants as $constant => $constant_value) {
-                self::$keys[static::class][$constant] = $constant_value;
-                self::$bits[static::class][$bit] = $constant_value;
+                self::$keys[$class][$constant] = $constant_value;
+                self::$bits[$class][$bit] = $constant_value;
                 $bit += $bit;
             }
         }
@@ -342,8 +347,9 @@ class Set
      */
     private static function bits()
     {
-        self::detectConstants();
+        $class = get_called_class();
+        self::detectConstants($class);
 
-        return self::$bits[static::class];
+        return self::$bits[$class];
     }
 }
