@@ -1,8 +1,9 @@
 <?php
 require 'bootstrap.php';
 
-use GpsLab\Component\Enum\Tests\Enum\DemoRef;
-use GpsLab\Component\Enum\Tests\Enum\DemoExp;
+use GpsLab\Component\Enum\Tests\Enum\AbcRef;
+use GpsLab\Component\Enum\Tests\Enum\AbcExp;
+use GpsLab\Component\Enum\Tests\Enum\DefRef;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Console\Input\ArgvInput;
 
@@ -13,50 +14,50 @@ $N = $input->getFirstArgument();
 
 $sw->start('ref', 'Reflection enum');
 for ($i=0; $i<$N; $i++) {
-    $a = DemoRef::a();
+    $a = AbcRef::a();
     $a->isA();
 
-    $b = DemoRef::b();
+    $b = AbcRef::b();
     $b->isA();
 
-    $c = DemoRef::c();
-    $e = (string) $c;
+    $c = AbcRef::c();
+    $z = (string) $c;
 
-    DemoRef::choices();
-    DemoRef::values();
+    AbcRef::choices();
+    AbcRef::values();
 }
 echo $sw->stop('ref').PHP_EOL;
 
 
 $sw->start('nmag', 'Reflection enum no magic');
 for ($i=0; $i<$N; $i++) {
-    $a = DemoRef::create(DemoRef::A);
-    $a->equals(DemoRef::create(DemoRef::A));
+    $d = DefRef::create(DefRef::D);
+    $d->equals(DefRef::create(DefRef::D));
 
-    $b = DemoRef::create(DemoRef::B);
-    $b->equals(DemoRef::create(DemoRef::A));
+    $e = DefRef::create(DefRef::E);
+    $e->equals(DefRef::create(DefRef::D));
 
-    $c = DemoRef::create(DemoRef::C);
-    $e = (string) $c;
+    $f = DefRef::create(DefRef::F);
+    $z = (string) $f;
 
-    DemoRef::choices();
-    DemoRef::values();
+    DefRef::choices();
+    DefRef::values();
 }
 echo $sw->stop('nmag').PHP_EOL;
 
 
 $sw->start('exp', 'Explicit enum');
 for ($i=0; $i<$N; $i++) {
-    $a = DemoExp::create(DemoExp::A);
-    $a->equals(DemoExp::create(DemoExp::A));
+    $a = AbcExp::create(AbcExp::A);
+    $a->equals(AbcExp::create(AbcExp::A));
 
-    $b = DemoExp::create(DemoExp::B);
-    $b->equals(DemoExp::create(DemoExp::A));
+    $b = AbcExp::create(AbcExp::B);
+    $b->equals(AbcExp::create(AbcExp::A));
 
-    $c = DemoExp::create(DemoExp::C);
+    $c = AbcExp::create(AbcExp::C);
     $e = (string) $c;
 
-    DemoExp::choices();
-    DemoExp::values();
+    AbcExp::choices();
+    AbcExp::values();
 }
 echo $sw->stop('exp').PHP_EOL;

@@ -13,15 +13,15 @@ namespace GpsLab\Component\Enum\Tests\Enum;
 use GpsLab\Component\Enum\ReflectionEnum;
 
 /**
- * @method static DemoRef a()
- * @method static DemoRef b()
- * @method static DemoRef c()
+ * @method static AbcRef a()
+ * @method static AbcRef b()
+ * @method static AbcRef c()
  * @method bool isA()
  * @method bool isB()
  * @method bool isC()
- * @method static DemoRef create($value)
+ * @method static AbcRef create($value)
  */
-class DemoRef extends ReflectionEnum
+class AbcRef extends ReflectionEnum
 {
     const A = 1;
     const B = 2;
@@ -32,6 +32,6 @@ class DemoRef extends ReflectionEnum
      */
     public function __toString()
     {
-        return 'acme.demo.'.strtolower(parent::__toString());
+        return 'acme.demo.abc.'.strtolower(parent::__toString());
     }
 }

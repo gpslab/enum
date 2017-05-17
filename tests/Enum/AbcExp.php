@@ -13,9 +13,9 @@ namespace GpsLab\Component\Enum\Tests\Enum;
 use GpsLab\Component\Enum\ExplicitEnum;
 
 /**
- * @method static DemoExp create($value)
+ * @method static AbcExp create($value)
  */
-class DemoExp extends ExplicitEnum
+class AbcExp extends ExplicitEnum
 {
     const A = 1;
     const B = 2;
@@ -27,9 +27,9 @@ class DemoExp extends ExplicitEnum
     public static function choices()
     {
         return [
-            self::A => 'acme.demo.a',
-            self::B => 'acme.demo.b',
-            self::C => 'acme.demo.c',
+            self::A => 'acme.demo.abc.a',
+            self::B => 'acme.demo.abc.b',
+            self::C => 'acme.demo.abc.c',
         ];
     }
 }
