@@ -12,13 +12,13 @@ $input = new ArgvInput();
 $N = $input->getFirstArgument();
 
 
-$sw->start('ref', 'ReflectionEnum');
+$sw->start('ref', 'Reflection enum');
 for ($i=0; $i<$N; $i++) {
     $a = DemoRef::a();
-    $a->equals(DemoRef::a());
+    $a->isA();
 
     $b = DemoRef::b();
-    $b->equals(DemoRef::a());
+    $b->isA();
 
     $c = DemoRef::c();
     $e = (string) $c;
@@ -27,12 +27,28 @@ for ($i=0; $i<$N; $i++) {
 
     unset($a, $b, $c, $e);
 }
-echo $sw->stop('ref');
-
-echo PHP_EOL;
+echo $sw->stop('ref').PHP_EOL;
 
 
-$sw->start('exp', 'ExplicitEnum');
+$sw->start('nstat', 'Reflection enum no static');
+for ($i=0; $i<$N; $i++) {
+    $a = DemoRef::create(DemoRef::A);
+    $a->equals(DemoRef::create(DemoRef::A));
+
+    $b = DemoRef::create(DemoRef::B);
+    $b->equals(DemoRef::create(DemoRef::A));
+
+    $c = DemoRef::create(DemoRef::C);
+    $e = (string) $c;
+
+    DemoRef::choices();
+
+    unset($a, $b, $c, $e);
+}
+echo $sw->stop('nstat').PHP_EOL;
+
+
+$sw->start('exp', 'Explicit enum');
 for ($i=0; $i<$N; $i++) {
     $a = DemoExp::create(DemoExp::A);
     $a->equals(DemoExp::create(DemoExp::A));
@@ -47,4 +63,4 @@ for ($i=0; $i<$N; $i++) {
 
     unset($a, $b, $c, $e);
 }
-echo $sw->stop('exp');
+echo $sw->stop('exp').PHP_EOL;
