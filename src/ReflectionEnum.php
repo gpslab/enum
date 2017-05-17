@@ -101,7 +101,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     public function equals(Enum $enum)
     {
-        return $this->value() === $enum->value() && static::class == get_class($enum);
+        return $this === $enum || ($this->value() === $enum->value() && static::class == get_class($enum));
     }
 
     /**
