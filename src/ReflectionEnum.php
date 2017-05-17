@@ -43,12 +43,8 @@ abstract class ReflectionEnum implements Enum, \Serializable
     /**
      * @param mixed $value
      */
-    protected function __construct($value)
+    final private function __construct($value)
     {
-        if (!static::isValid($value)) {
-            throw OutOfEnumException::create($value, static::class);
-        }
-
         $this->value = $value;
     }
 
@@ -59,14 +55,20 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     public static function create($value)
     {
-        $key = static::class.'|'.$value;
+        self::detectConstants(static::class);
 
-        // limitation of count object instances
-        if (!isset(self::$instances[$key])) {
-            self::$instances[$key] = new static($value);
+        $method = array_search($value, self::$create_methods[static::class], true);
+
+        if ($method === false) {
+            throw OutOfEnumException::create($value, static::class);
         }
 
-        return self::$instances[$key];
+        // limitation of count object instances
+        if (!isset(self::$instances[static::class][$method])) {
+            self::$instances[static::class][$method] = new static($value);
+        }
+
+        return self::$instances[static::class][$method];
     }
 
     /**
@@ -250,12 +252,16 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     public static function __callStatic($method, array $arguments = [])
     {
+        if (isset(self::$instances[static::class][$method])) {
+            return self::$instances[static::class][$method];
+        }
+
         self::detectConstants(static::class);
 
         if (!isset(self::$create_methods[static::class][$method])) {
             throw BadMethodCallException::noStaticMethod($method, static::class);
         }
 
-        return static::create(self::$create_methods[static::class][$method]);
+        return self::$instances[static::class][$method] = new static(self::$create_methods[static::class][$method]);
     }
 }
