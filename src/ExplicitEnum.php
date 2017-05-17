@@ -27,12 +27,8 @@ abstract class ExplicitEnum implements Enum, \Serializable
     /**
      * @param mixed $value
      */
-    protected function __construct($value)
+    final private function __construct($value)
     {
-        if (!static::isValid($value)) {
-            throw OutOfEnumException::create($value, static::class);
-        }
-
         $this->value = $value;
     }
 
@@ -41,12 +37,16 @@ abstract class ExplicitEnum implements Enum, \Serializable
      *
      * @return Enum
      */
-    public static function create($value)
+    final public static function create($value)
     {
         $key = static::class.'|'.$value;
 
         // limitation of count object instances
         if (!isset(self::$instances[$key])) {
+            if (!static::isValid($value)) {
+                throw OutOfEnumException::create($value, static::class);
+            }
+
             self::$instances[$key] = new static($value);
         }
 
@@ -56,7 +56,7 @@ abstract class ExplicitEnum implements Enum, \Serializable
     /**
      * @return mixed
      */
-    public function value()
+    final public function value()
     {
         return $this->value;
     }
@@ -66,7 +66,7 @@ abstract class ExplicitEnum implements Enum, \Serializable
      *
      * @return Enum[]
      */
-    public static function values()
+    final public static function values()
     {
         $values = [];
         foreach (static::choices() as $value => $label) {
@@ -81,7 +81,7 @@ abstract class ExplicitEnum implements Enum, \Serializable
      *
      * @return bool
      */
-    public function equals(Enum $enum)
+    final public function equals(Enum $enum)
     {
         return $this === $enum || ($this->value() === $enum->value() && static::class == get_class($enum));
     }
@@ -93,7 +93,7 @@ abstract class ExplicitEnum implements Enum, \Serializable
      *
      * @return bool
      */
-    public static function isValid($value)
+    final public static function isValid($value)
     {
         return array_key_exists($value, static::choices());
     }

@@ -53,7 +53,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      *
      * @return Enum
      */
-    public static function create($value)
+    final public static function create($value)
     {
         self::detectConstants(static::class);
 
@@ -74,7 +74,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
     /**
      * @return mixed
      */
-    public function value()
+    final public function value()
     {
         return $this->value;
     }
@@ -84,7 +84,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      *
      * @return Enum[]
      */
-    public static function values()
+    final public static function values()
     {
         $values = [];
         foreach (self::constants() as $constant => $value) {
@@ -99,7 +99,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      *
      * @return bool
      */
-    public function equals(Enum $enum)
+    final public function equals(Enum $enum)
     {
         return $this === $enum || ($this->value() === $enum->value() && static::class == get_class($enum));
     }
@@ -111,7 +111,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      *
      * @return bool
      */
-    public static function isValid($value)
+    final public static function isValid($value)
     {
         return in_array($value, self::constants(), true);
     }
@@ -128,7 +128,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      *
      * @return array
      */
-    public static function choices()
+    final public static function choices()
     {
         $choices = [];
         foreach (self::constants() as $value) {
