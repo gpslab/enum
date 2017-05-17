@@ -28,7 +28,7 @@ class AbcMyClabs extends Enum
      */
     public static function choices()
     {
-        $choices = [];
+        $choices = array();
         foreach (self::values() as $value) {
             $choices[$value->getValue()] = (string) $value;
         }

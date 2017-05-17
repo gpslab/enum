@@ -19,7 +19,6 @@ use GpsLab\Component\Enum\ReflectionEnum;
  * @method bool isA()
  * @method bool isB()
  * @method bool isC()
- * @method static DefRef create($value)
  */
 class DefRef extends ReflectionEnum
 {
