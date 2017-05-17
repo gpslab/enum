@@ -23,6 +23,7 @@ for ($i=0; $i<$N; $i++) {
     $e = (string) $c;
 
     DemoRef::choices();
+    DemoRef::values();
 
     unset($a, $b, $c, $e);
 }
@@ -41,6 +42,7 @@ for ($i=0; $i<$N; $i++) {
     $e = (string) $c;
 
     DemoRef::choices();
+    DemoRef::values();
 
     unset($a, $b, $c, $e);
 }
@@ -59,6 +61,7 @@ for ($i=0; $i<$N; $i++) {
     $e = (string) $c;
 
     DemoExp::choices();
+    DemoExp::values();
 
     unset($a, $b, $c, $e);
 }
