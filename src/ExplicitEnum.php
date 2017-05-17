@@ -64,11 +64,16 @@ abstract class ExplicitEnum implements Enum, \Serializable
     /**
      * Available values.
      *
-     * @return mixed[]
+     * @return Enum[]
      */
     public static function values()
     {
-        return array_keys(static::choices());
+        $values = [];
+        foreach (static::choices() as $value => $label) {
+            $values[$label] = $value;
+        }
+
+        return $values;
     }
 
     /**

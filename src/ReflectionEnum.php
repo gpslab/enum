@@ -80,11 +80,17 @@ abstract class ReflectionEnum implements Enum, \Serializable
     /**
      * Available values.
      *
-     * @return mixed[]
+     * @return Enum[]
      */
     public static function values()
     {
-        return array_values(static::createMethods());
+        $values = [];
+        foreach (static::createMethods() as $value) {
+            $value = static::create($value);
+            $values[(string) $value] = $value;
+        }
+
+        return $values;
     }
 
     /**
@@ -124,7 +130,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
     public static function choices()
     {
         $choices = [];
-        foreach (static::values() as $value) {
+        foreach (static::createMethods() as $value) {
             $choices[$value] = (string) static::create($value);
         }
 
