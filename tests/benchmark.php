@@ -30,7 +30,7 @@ for ($i=0; $i<$N; $i++) {
 echo $sw->stop('ref').PHP_EOL;
 
 
-$sw->start('nstat', 'Reflection enum no static');
+$sw->start('nmag', 'Reflection enum no magic');
 for ($i=0; $i<$N; $i++) {
     $a = DemoRef::create(DemoRef::A);
     $a->equals(DemoRef::create(DemoRef::A));
@@ -45,7 +45,7 @@ for ($i=0; $i<$N; $i++) {
 
     unset($a, $b, $c, $e);
 }
-echo $sw->stop('nstat').PHP_EOL;
+echo $sw->stop('nmag').PHP_EOL;
 
 
 $sw->start('exp', 'Explicit enum');
