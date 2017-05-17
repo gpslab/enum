@@ -38,7 +38,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
     /**
      * @var mixed[][]
      */
-    private static $keys = [];
+    private static $constants = [];
 
     /**
      * @param mixed $value
@@ -85,8 +85,8 @@ abstract class ReflectionEnum implements Enum, \Serializable
     public static function values()
     {
         $values = [];
-        foreach (self::keys() as $key => $value) {
-            $values[$key] = static::create($value);
+        foreach (self::constants() as $constant => $value) {
+            $values[$constant] = static::create($value);
         }
 
         return $values;
@@ -111,7 +111,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     public static function isValid($value)
     {
-        return in_array($value, self::keys(), true);
+        return in_array($value, self::constants(), true);
     }
 
     /**
@@ -129,7 +129,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
     public static function choices()
     {
         $choices = [];
-        foreach (self::keys() as $value) {
+        foreach (self::constants() as $value) {
             $choices[$value] = (string) static::create($value);
         }
 
@@ -143,7 +143,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     public function __toString()
     {
-        return $this->key();
+        return $this->constant();
     }
 
     final public function __clone()
@@ -175,7 +175,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
         if (!isset(self::$create_methods[$class])) {
             self::$create_methods[$class] = [];
             self::$is_methods[$class] = [];
-            self::$keys[$class] = [];
+            self::$constants[$class] = [];
 
             $constants = [];
             $reflection = new \ReflectionClass($class);
@@ -196,7 +196,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
             }
 
             foreach ($constants as $constant => $constant_value) {
-                self::$keys[$class][$constant] = $constant_value;
+                self::$constants[$class][$constant] = $constant_value;
 
                 // second parameter of ucwords() is not supported on HHVM
                 $constant = str_replace(' ', '', ucwords(str_replace('_', ' ', strtolower($constant))));
@@ -210,19 +210,19 @@ abstract class ReflectionEnum implements Enum, \Serializable
     /**
      * @return array
      */
-    private static function keys()
+    private static function constants()
     {
         self::detectConstants(static::class);
 
-        return self::$keys[static::class];
+        return self::$constants[static::class];
     }
 
     /**
      * @return string
      */
-    private function key()
+    private function constant()
     {
-        return array_search($this->value(), self::keys());
+        return array_search($this->value(), self::constants());
     }
 
     /**
