@@ -111,7 +111,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     public static function isValid($value)
     {
-        return in_array($value, self::createMethods(), true);
+        return in_array($value, self::keys(), true);
     }
 
     /**
@@ -129,7 +129,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
     public static function choices()
     {
         $choices = [];
-        foreach (self::createMethods() as $value) {
+        foreach (self::keys() as $value) {
             $choices[$value] = (string) static::create($value);
         }
 
@@ -210,26 +210,6 @@ abstract class ReflectionEnum implements Enum, \Serializable
     /**
      * @return array
      */
-    private static function createMethods()
-    {
-        self::detectConstants(static::class);
-
-        return self::$create_methods[static::class];
-    }
-
-    /**
-     * @return array
-     */
-    private static function isMethods()
-    {
-        self::detectConstants(static::class);
-
-        return self::$is_methods[static::class];
-    }
-
-    /**
-     * @return array
-     */
     private static function keys()
     {
         self::detectConstants(static::class);
@@ -253,11 +233,13 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     public function __call($method, array $arguments = [])
     {
-        if (!isset(self::isMethods()[$method])) {
+        self::detectConstants(static::class);
+
+        if (!isset(self::$is_methods[static::class][$method])) {
             throw BadMethodCallException::noMethod($method, static::class);
         }
 
-        return $this->value === self::isMethods()[$method];
+        return $this->value === self::$is_methods[static::class][$method];
     }
 
     /**
@@ -268,10 +250,12 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     public static function __callStatic($method, array $arguments = [])
     {
-        if (!isset(self::createMethods()[$method])) {
+        self::detectConstants(static::class);
+
+        if (!isset(self::$create_methods[static::class][$method])) {
             throw BadMethodCallException::noStaticMethod($method, static::class);
         }
 
-        return static::create(self::createMethods()[$method]);
+        return static::create(self::$create_methods[static::class][$method]);
     }
 }
