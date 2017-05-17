@@ -12,9 +12,6 @@ namespace GpsLab\Component\Enum\Tests\Enum;
 
 use GpsLab\Component\Enum\ExplicitEnum;
 
-/**
- * @method static AbcExp create($value)
- */
 class AbcExp extends ExplicitEnum
 {
     const A = 1;
