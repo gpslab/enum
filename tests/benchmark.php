@@ -24,8 +24,6 @@ for ($i=0; $i<$N; $i++) {
 
     DemoRef::choices();
     DemoRef::values();
-
-    unset($a, $b, $c, $e);
 }
 echo $sw->stop('ref').PHP_EOL;
 
@@ -43,8 +41,6 @@ for ($i=0; $i<$N; $i++) {
 
     DemoRef::choices();
     DemoRef::values();
-
-    unset($a, $b, $c, $e);
 }
 echo $sw->stop('nmag').PHP_EOL;
 
@@ -62,7 +58,5 @@ for ($i=0; $i<$N; $i++) {
 
     DemoExp::choices();
     DemoExp::values();
-
-    unset($a, $b, $c, $e);
 }
 echo $sw->stop('exp').PHP_EOL;
