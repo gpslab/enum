@@ -22,7 +22,7 @@ abstract class ExplicitEnum implements Enum, \Serializable
     /**
      * @var Enum[]
      */
-    private static $instances = array();
+    private static $instances = [];
 
     /**
      * @param mixed $value
@@ -39,12 +39,12 @@ abstract class ExplicitEnum implements Enum, \Serializable
      */
     final public static function create($value)
     {
-        $key = get_called_class().'|'.$value;
+        $key = static::class.'|'.$value;
 
         // limitation of count object instances
         if (!isset(self::$instances[$key])) {
             if (!static::isValid($value)) {
-                throw OutOfEnumException::create($value, get_called_class());
+                throw OutOfEnumException::create($value, static::class);
             }
 
             self::$instances[$key] = new static($value);
@@ -68,7 +68,7 @@ abstract class ExplicitEnum implements Enum, \Serializable
      */
     final public static function values()
     {
-        $values = array();
+        $values = [];
         foreach (static::choices() as $value => $label) {
             $values[$label] = $value;
         }
@@ -83,7 +83,7 @@ abstract class ExplicitEnum implements Enum, \Serializable
      */
     final public function equals(Enum $enum)
     {
-        return $this === $enum || ($this->value() === $enum->value() && get_called_class() == get_class($enum));
+        return $this === $enum || ($this->value() === $enum->value() && static::class == get_class($enum));
     }
 
     /**

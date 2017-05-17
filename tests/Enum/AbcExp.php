@@ -23,10 +23,10 @@ class AbcExp extends ExplicitEnum
      */
     public static function choices()
     {
-        return array(
+        return [
             self::A => 'acme.demo.abc.a',
             self::B => 'acme.demo.abc.b',
             self::C => 'acme.demo.abc.c',
-        );
+        ];
     }
 }

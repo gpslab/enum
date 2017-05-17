@@ -28,7 +28,7 @@ class AbcMarcMabe extends Enum
      */
     public static function values()
     {
-        $values = array();
+        $values = [];
         foreach (self::getConstants() as $name => $value) {
             $values[$name] = self::byValue($value);
         }
@@ -41,7 +41,7 @@ class AbcMarcMabe extends Enum
      */
     public static function choices()
     {
-        $choices = array();
+        $choices = [];
         foreach (self::values() as $value) {
             $choices[$value->getValue()] = (string) $value;
         }
