@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2011, Peter Gribanov
  * @license   http://opensource.org/licenses/MIT
  */
-require 'bootstrap.php';
+require __DIR__.'/../bootstrap.php';
 
 use GpsLab\Component\Enum\Tests\Enum\AbcExp;
 use GpsLab\Component\Enum\Tests\Enum\Rival\AbcHappyTypes;

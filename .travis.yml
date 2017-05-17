@@ -72,7 +72,7 @@ before_script:
 script:
     - if [ "$COVERAGE" != "1" ]; then vendor/bin/phpunit; fi;
     - if [ "$COVERAGE" == "1" ]; then vendor/bin/phpunit --coverage-clover build/coverage-clover.xml; fi;
-    - if [ "$BENCHMARK_RIVAL" == "1" ]; php tests/benchmark_rival.php 100000; fi;
+    - if [ "$BENCHMARK_RIVAL" == "1" ]; php tests/benchmark/enum_rival.php 100000; fi;
 
 after_script:
     - if [ "$COVERAGE" == "1" ]; then vendor/bin/ocular code-coverage:upload --format=php-clover build/coverage-clover.xml; fi;
