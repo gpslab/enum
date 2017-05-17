@@ -1,9 +1,11 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: pgribanov
- * Date: 17.05.2017
- * Time: 17:22
+ * GpsLab component.
+ *
+ * @author    Peter Gribanov <info@peter-gribanov.ru>
+ * @copyright Copyright (c) 2011, Peter Gribanov
+ * @license   http://opensource.org/licenses/MIT
  */
 
 namespace GpsLab\Component\Enum\Tests\Enum;
@@ -15,21 +17,24 @@ class AbcHappyTypes extends EnumerableType
     /**
      * @return self
      */
-    final public static function A() {
+    final public static function A()
+    {
         return static::get(1, 'A');
     }
 
     /**
      * @return self
      */
-    final public static function B() {
+    final public static function B()
+    {
         return static::get(2, 'B');
     }
 
     /**
      * @return self
      */
-    final public static function C() {
+    final public static function C()
+    {
         return static::get(3, 'C');
     }
 
