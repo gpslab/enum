@@ -85,9 +85,8 @@ abstract class ReflectionEnum implements Enum, \Serializable
     public static function values()
     {
         $values = [];
-        foreach (static::createMethods() as $value) {
-            $value = static::create($value);
-            $values[(string) $value] = $value;
+        foreach (self::keys() as $key => $value) {
+            $values[$key] = static::create($value);
         }
 
         return $values;
@@ -112,7 +111,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     public static function isValid($value)
     {
-        return in_array($value, static::createMethods(), true);
+        return in_array($value, self::createMethods(), true);
     }
 
     /**
@@ -130,7 +129,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
     public static function choices()
     {
         $choices = [];
-        foreach (static::createMethods() as $value) {
+        foreach (self::createMethods() as $value) {
             $choices[$value] = (string) static::create($value);
         }
 
@@ -210,7 +209,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     private static function createMethods()
     {
-        static::detectConstants();
+        self::detectConstants();
 
         return self::$create_methods[static::class];
     }
@@ -220,9 +219,19 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     private static function isMethods()
     {
-        static::detectConstants();
+        self::detectConstants();
 
         return self::$is_methods[static::class];
+    }
+
+    /**
+     * @return array
+     */
+    private static function keys()
+    {
+        self::detectConstants();
+
+        return self::$keys[static::class];
     }
 
     /**
@@ -230,9 +239,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     private function key()
     {
-        static::detectConstants();
-
-        return array_search($this->value(), self::$keys[static::class]);
+        return array_search($this->value(), self::keys());
     }
 
     /**
@@ -243,11 +250,11 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     public function __call($method, array $arguments = [])
     {
-        if (!isset(static::isMethods()[$method])) {
+        if (!isset(self::isMethods()[$method])) {
             throw BadMethodCallException::noMethod($method, static::class);
         }
 
-        return $this->value === static::isMethods()[$method];
+        return $this->value === self::isMethods()[$method];
     }
 
     /**
@@ -258,10 +265,10 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     public static function __callStatic($method, array $arguments = [])
     {
-        if (!isset(static::createMethods()[$method])) {
+        if (!isset(self::createMethods()[$method])) {
             throw BadMethodCallException::noStaticMethod($method, static::class);
         }
 
-        return static::create(static::createMethods()[$method]);
+        return static::create(self::createMethods()[$method]);
     }
 }
