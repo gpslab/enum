@@ -167,15 +167,18 @@ abstract class ReflectionEnum implements Enum, \Serializable
         static::create($this->value = $data);
     }
 
-    private static function detectConstants()
+    /**
+     * @param string $class
+     */
+    private static function detectConstants($class)
     {
-        if (!isset(self::$create_methods[static::class])) {
-            self::$create_methods[static::class] = [];
-            self::$is_methods[static::class] = [];
-            self::$keys[static::class] = [];
+        if (!isset(self::$create_methods[$class])) {
+            self::$create_methods[$class] = [];
+            self::$is_methods[$class] = [];
+            self::$keys[$class] = [];
 
             $constants = [];
-            $reflection = new \ReflectionClass(static::class);
+            $reflection = new \ReflectionClass($class);
 
             if (PHP_VERSION_ID >= 70100) {
                 // Since PHP-7.1 visibility modifiers are allowed for class constants
@@ -193,13 +196,13 @@ abstract class ReflectionEnum implements Enum, \Serializable
             }
 
             foreach ($constants as $constant => $constant_value) {
-                self::$keys[static::class][$constant] = $constant_value;
+                self::$keys[$class][$constant] = $constant_value;
 
                 // second parameter of ucwords() is not supported on HHVM
                 $constant = str_replace(' ', '', ucwords(str_replace('_', ' ', strtolower($constant))));
 
-                self::$is_methods[static::class]['is'.$constant] = $constant_value;
-                self::$create_methods[static::class][lcfirst($constant)] = $constant_value;
+                self::$is_methods[$class]['is'.$constant] = $constant_value;
+                self::$create_methods[$class][lcfirst($constant)] = $constant_value;
             }
         }
     }
@@ -209,7 +212,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     private static function createMethods()
     {
-        self::detectConstants();
+        self::detectConstants(static::class);
 
         return self::$create_methods[static::class];
     }
@@ -219,7 +222,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     private static function isMethods()
     {
-        self::detectConstants();
+        self::detectConstants(static::class);
 
         return self::$is_methods[static::class];
     }
@@ -229,7 +232,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     private static function keys()
     {
-        self::detectConstants();
+        self::detectConstants(static::class);
 
         return self::$keys[static::class];
     }
