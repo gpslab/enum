@@ -16,7 +16,9 @@ notifications:
 matrix:
     fast_finish: true
     include:
-        - php: 5.5
+        - php: 5.4
+          env: COVERAGE=1
+        - php: 7.1
           env: COVERAGE=1
         - php: 7.1
           env: BENCHMARK=1
@@ -28,8 +30,6 @@ matrix:
           env: BENCHMARK=1
         - php: 5.4
           env: BENCHMARK=1
-    allow_failures:
-        - php: hhvm
 
 before_install:
     - if [ "$TRAVIS_PHP_VERSION" != "hhvm" ] && [ "$COVERAGE" != "1" ]; then phpenv config-rm xdebug.ini; fi;
