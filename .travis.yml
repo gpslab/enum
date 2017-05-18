@@ -19,40 +19,15 @@ matrix:
         - php: 5.5
           env: COVERAGE=1
         - php: 7.1
-          env:
-            - BENCHMARK_ENUM_RIVAL=1
-            - STOPWATCH_VERSION=~2.3|~3.0
-            - MYCLABS_VERSION=~1.5
-            - MARC_MAB_VERSION=~2.3
-            - HAPPY_TYPES_VERSION=~1.0
+          env: BENCHMARK=1
         - php: 7.0
-          env:
-            - BENCHMARK_ENUM_RIVAL=1
-            - STOPWATCH_VERSION=~2.3|~3.0
-            - MYCLABS_VERSION=~1.5
-            - MARC_MAB_VERSION=~2.3
-            - HAPPY_TYPES_VERSION=~1.0
+          env: BENCHMARK=1
         - php: 5.6
-          env:
-            - BENCHMARK_ENUM_RIVAL=1
-            - STOPWATCH_VERSION=~2.3|~3.0
-            - MYCLABS_VERSION=~1.5
-            - MARC_MAB_VERSION=~2.3
-            - HAPPY_TYPES_VERSION=~1.0
+          env: BENCHMARK=1
         - php: 5.5
-          env:
-            - BENCHMARK_ENUM_RIVAL=1
-            - STOPWATCH_VERSION=~2.3|~3.0
-            - MYCLABS_VERSION=~1.5
-            - MARC_MAB_VERSION=~2.3
-            - HAPPY_TYPES_VERSION=~1.0
+          env: BENCHMARK=1
 #        - php: 5.4
-#          env:
-#            - BENCHMARK_ENUM_RIVAL=1
-#            - STOPWATCH_VERSION=~2.3|~3.0
-#            - MYCLABS_VERSION=~1.5
-#            - MARC_MAB_VERSION=~2.3
-#            - HAPPY_TYPES_VERSION=~1.0
+#          env: BENCHMARK=1
     allow_failures:
         - php: hhvm
 
@@ -63,16 +38,12 @@ before_install:
     - composer self-update
 
 before_script:
-    - if [ "$BENCHMARK_ENUM_RIVAL" == "1" ]; then composer require "symfony/stopwatch${STOPWATCH_VERSION}" --dev --no-update; fi;
-    - if [ "$BENCHMARK_ENUM_RIVAL" == "1" ]; then composer require "myclabs/php-enum:${MYCLABS_VERSION}" --dev --no-update; fi;
-    - if [ "$BENCHMARK_ENUM_RIVAL" == "1" ]; then composer require "marc-mabe/php-enum:${MARC_MAB_VERSION}" --dev --no-update; fi;
-    - if [ "$BENCHMARK_ENUM_RIVAL" == "1" ]; then composer require "happy-types/enumerable-type:${HAPPY_TYPES_VERSION}" --dev --no-update; fi;
     - composer install --prefer-dist --no-interaction --no-scripts --no-progress
 
 script:
     - if [ "$COVERAGE" != "1" ]; then vendor/bin/phpunit; fi;
     - if [ "$COVERAGE" == "1" ]; then vendor/bin/phpunit --coverage-clover build/coverage-clover.xml; fi;
-    - if [ "$BENCHMARK_ENUM_RIVAL" == "1" ]; then php tests/benchmark/enum_rival.php 100000; fi;
+    - if [ "$BENCHMARK" == "1" ]; then php tests/benchmark/enum_rival.php 100000; fi;
 
 after_script:
     - if [ "$COVERAGE" == "1" ]; then vendor/bin/ocular code-coverage:upload --format=php-clover build/coverage-clover.xml; fi;
