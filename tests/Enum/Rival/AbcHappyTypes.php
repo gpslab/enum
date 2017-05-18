@@ -45,7 +45,7 @@ class AbcHappyTypes extends EnumerableType
      */
     public function equals(EnumerableType $enum)
     {
-        return $this === $enum || ($this->id() === $enum->id() && static::class == get_class($enum));
+        return $this === $enum || ($this->id() === $enum->id() && get_called_class() == get_class($enum));
     }
 
     /**

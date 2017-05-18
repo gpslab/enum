@@ -39,12 +39,12 @@ abstract class ExplicitEnum implements Enum, \Serializable
      */
     final public static function create($value)
     {
-        $key = static::class.'|'.$value;
+        $key = get_called_class().'|'.$value;
 
         // limitation of count object instances
         if (!isset(self::$instances[$key])) {
             if (!static::isValid($value)) {
-                throw OutOfEnumException::create($value, static::class);
+                throw OutOfEnumException::create($value, get_called_class());
             }
 
             self::$instances[$key] = new static($value);
@@ -83,7 +83,7 @@ abstract class ExplicitEnum implements Enum, \Serializable
      */
     final public function equals(Enum $enum)
     {
-        return $this === $enum || ($this->value() === $enum->value() && static::class == get_class($enum));
+        return $this === $enum || ($this->value() === $enum->value() && get_called_class() == get_class($enum));
     }
 
     /**

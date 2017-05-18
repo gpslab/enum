@@ -7,7 +7,7 @@ php:
     - 7.0
     - 5.6
     - 5.5
-#    - 5.4
+    - 5.4
     - hhvm
 
 notifications:
@@ -26,8 +26,8 @@ matrix:
           env: BENCHMARK=1
         - php: 5.5
           env: BENCHMARK=1
-#        - php: 5.4
-#          env: BENCHMARK=1
+        - php: 5.4
+          env: BENCHMARK=1
     allow_failures:
         - php: hhvm
 

@@ -50,7 +50,7 @@ class Set
         }
 
         $values = [];
-        foreach (self::$bits[static::class] as $bit => $value) {
+        foreach (self::$bits[get_called_class()] as $bit => $value) {
             if ($this->bit & $bit) {
                 $values[] = $value;
             }
@@ -253,10 +253,11 @@ class Set
      */
     public static function choices()
     {
-        self::detectConstants(static::class);
+        $class = get_called_class();
+        self::detectConstants($class);
 
         $choices = [];
-        foreach (self::$keys[static::class] as $value) {
+        foreach (self::$keys[$class] as $value) {
             $choices[$value] = static::readable($value);
         }
 
@@ -272,7 +273,7 @@ class Set
     {
         self::validateValue($value);
 
-        return array_search($value, self::$keys[static::class]);
+        return array_search($value, self::$keys[get_called_class()]);
     }
 
     /**
@@ -281,7 +282,7 @@ class Set
     private static function validateValue($value)
     {
         if (!static::isValid($value)) {
-            throw OutOfEnumException::create($value, static::class);
+            throw OutOfEnumException::create($value, get_called_class());
         }
     }
 
@@ -290,8 +291,9 @@ class Set
      */
     private static function validateType($object)
     {
-        if (static::class !== get_class($object)) {
-            throw InvalidSetException::notInstanceOf(static::class, get_class($object));
+        $class = get_called_class();
+        if ($class !== get_class($object)) {
+            throw InvalidSetException::notInstanceOf($class, get_class($object));
         }
     }
 
@@ -345,8 +347,9 @@ class Set
      */
     private static function bits()
     {
-        self::detectConstants(static::class);
+        $class = get_called_class();
+        self::detectConstants($class);
 
-        return self::$bits[static::class];
+        return self::$bits[$class];
     }
 }
