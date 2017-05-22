@@ -13,8 +13,8 @@ use GpsLab\Component\Enum\Set;
 class ConstAccess extends Set
 {
     private const OPTION_PUT = 'put';
-    protected const OPTION_DELETE = 'delete';
     public const ACTION_GET = 'get';
+    protected const OPTION_DELETE = 'delete';
     public const ACTION_POST = 'post';
 
     /**

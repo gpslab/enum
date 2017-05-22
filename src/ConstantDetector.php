@@ -24,9 +24,9 @@ class ConstantDetector
             // Since PHP-7.1 visibility modifiers are allowed for class constants
             // for enumerations we are only interested in public once.
             foreach ($reflection->getReflectionConstants() as $constant) {
-//                if ($constant->isPublic()) {
+                if ($constant->isPublic()) {
                     $constants[$constant->getName()] = $constant->getValue();
-//                }
+                }
             }
 
             return $constants;
