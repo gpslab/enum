@@ -6,7 +6,7 @@
  * @author Peter Gribanov <PGribanov@1tv.com>
  */
 
-namespace GpsLab\Component\Enum\Tests;
+namespace GpsLab\Component\Enum\Tests\Enum;
 
 use GpsLab\Component\Enum\Tests\Fixture\Enum\ColorBW;
 

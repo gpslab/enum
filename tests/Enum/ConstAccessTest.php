@@ -6,30 +6,38 @@
  * @author Peter Gribanov <PGribanov@1tv.com>
  */
 
-namespace GpsLab\Component\Enum\Tests;
+namespace GpsLab\Component\Enum\Tests\Enum;
 
-use GpsLab\Component\Enum\Tests\Fixture\Enum\AbcRef;
+use GpsLab\Component\Enum\Tests\Fixture\Enum\ConstAccess;
 
-class AbcRefTest extends \PHPUnit_Framework_TestCase
+class ConstAccessTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var array
      */
-    private $choices = [
-        AbcRef::A => 'acme.demo.abc.a',
-        AbcRef::B => 'acme.demo.abc.b',
-        AbcRef::C => 'acme.demo.abc.c',
-    ];
+    private $choices = [];
+
+    public function setUp()
+    {
+        if (PHP_VERSION_ID < 70100) {
+            $this->markTestSkipped('This test is for PHP-7.1 and upper only');
+        }
+
+        $this->choices = [
+            ConstAccess::ACTION_GET => 'acme.demo.const_access.action_get',
+            ConstAccess::ACTION_POST => 'acme.demo.const_access.action_post',
+        ];
+    }
 
     public function testChoices()
     {
-        $this->assertEquals($this->choices, AbcRef::choices());
+        $this->assertEquals($this->choices, ConstAccess::choices());
     }
 
     public function testValues()
     {
         $values = [];
-        foreach (AbcRef::values() as $value) {
+        foreach (ConstAccess::values() as $value) {
             $values[] = $value->value();
         }
         sort($values);
@@ -58,13 +66,13 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreate($value, $title)
     {
-        $this->assertTrue(AbcRef::isValid($value));
+        $this->assertTrue(ConstAccess::isValid($value));
 
-        $channel = AbcRef::byValue($value);
+        $channel = ConstAccess::byValue($value);
 
         $this->assertEquals($value, $channel->value());
         $this->assertEquals($title, (string) $channel);
-        $this->assertTrue($channel->equals(AbcRef::byValue($value)));
+        $this->assertTrue($channel->equals(ConstAccess::byValue($value)));
     }
 
     /**
@@ -72,7 +80,7 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
      */
     public function getSerializeData()
     {
-        $class = 'GpsLab\Component\Enum\Tests\Enum\AbcRef';
+        $class = 'GpsLab\Component\Enum\Tests\Enum\ConstVisibility';
         $class_len = strlen($class);
 
         $data = [];
@@ -95,7 +103,7 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
      */
     public function testSerialize($value, $result)
     {
-        $this->assertEquals($result, serialize(AbcRef::byValue($value)));
+        $this->assertEquals($result, serialize(ConstAccess::byValue($value)));
     }
 
     /**
@@ -106,7 +114,7 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
      */
     public function testUnserialize($value, $result)
     {
-        $this->assertEquals(AbcRef::byValue($value), unserialize($result));
+        $this->assertEquals(ConstAccess::byValue($value), unserialize($result));
     }
 
     /**
@@ -114,8 +122,8 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
      */
     public function testClone()
     {
-        $abc = AbcRef::a();
-        $abc = clone $abc;
+        $action = ConstAccess::actionGet();
+        $action = clone $action;
     }
 
     /**
@@ -123,7 +131,7 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
      */
     public function testValueNotSupported()
     {
-        AbcRef::byValue('foo');
+        ConstAccess::byValue('foo');
     }
 
     /**
@@ -131,7 +139,7 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
      */
     public function testUndefinedNamedConstruct()
     {
-        AbcRef::undefined();
+        ConstAccess::undefined();
     }
 
     /**
@@ -139,27 +147,13 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
      */
     public function testUndefinedMethod()
     {
-        AbcRef::a()->undefined();
+        ConstAccess::actionGet()->undefined();
     }
 
-    public function testIsA()
+    public function testIsRed()
     {
-        $this->assertEquals(AbcRef::A, AbcRef::a()->value());
-        $this->assertTrue(AbcRef::a()->isA());
-        $this->assertFalse(AbcRef::a()->isB());
-    }
-
-    public function testIsB()
-    {
-        $this->assertEquals(AbcRef::B, AbcRef::b()->value());
-        $this->assertTrue(AbcRef::b()->isB());
-        $this->assertFalse(AbcRef::b()->isA());
-    }
-
-    public function testIsC()
-    {
-        $this->assertEquals(AbcRef::C, AbcRef::c()->value());
-        $this->assertTrue(AbcRef::c()->isC());
-        $this->assertFalse(AbcRef::c()->isA());
+        $this->assertEquals(ConstAccess::ACTION_GET, ConstAccess::actionGet()->value());
+        $this->assertTrue(ConstAccess::actionGet()->isActionGet());
+        $this->assertFalse(ConstAccess::actionGet()->isActionPost());
     }
 }

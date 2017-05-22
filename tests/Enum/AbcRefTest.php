@@ -6,30 +6,30 @@
  * @author Peter Gribanov <PGribanov@1tv.com>
  */
 
-namespace GpsLab\Component\Enum\Tests;
+namespace GpsLab\Component\Enum\Tests\Enum;
 
-use GpsLab\Component\Enum\Tests\Fixture\Enum\AbcExp;
+use GpsLab\Component\Enum\Tests\Fixture\Enum\AbcRef;
 
-class AbcExpTest extends \PHPUnit_Framework_TestCase
+class AbcRefTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var array
      */
     private $choices = [
-        AbcExp::A => 'acme.demo.abc.a',
-        AbcExp::B => 'acme.demo.abc.b',
-        AbcExp::C => 'acme.demo.abc.c',
+        AbcRef::A => 'acme.demo.abc.a',
+        AbcRef::B => 'acme.demo.abc.b',
+        AbcRef::C => 'acme.demo.abc.c',
     ];
 
     public function testChoices()
     {
-        $this->assertEquals($this->choices, AbcExp::choices());
+        $this->assertEquals($this->choices, AbcRef::choices());
     }
 
     public function testValues()
     {
         $values = [];
-        foreach (AbcExp::values() as $value) {
+        foreach (AbcRef::values() as $value) {
             $values[] = $value->value();
         }
         sort($values);
@@ -58,13 +58,13 @@ class AbcExpTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreate($value, $title)
     {
-        $this->assertTrue(AbcExp::isValid($value));
+        $this->assertTrue(AbcRef::isValid($value));
 
-        $channel = AbcExp::byValue($value);
+        $channel = AbcRef::byValue($value);
 
         $this->assertEquals($value, $channel->value());
         $this->assertEquals($title, (string) $channel);
-        $this->assertTrue($channel->equals(AbcExp::byValue($value)));
+        $this->assertTrue($channel->equals(AbcRef::byValue($value)));
     }
 
     /**
@@ -72,7 +72,7 @@ class AbcExpTest extends \PHPUnit_Framework_TestCase
      */
     public function getSerializeData()
     {
-        $class = 'GpsLab\Component\Enum\Tests\Enum\AbcExp';
+        $class = 'GpsLab\Component\Enum\Tests\Enum\AbcRef';
         $class_len = strlen($class);
 
         $data = [];
@@ -95,7 +95,7 @@ class AbcExpTest extends \PHPUnit_Framework_TestCase
      */
     public function testSerialize($value, $result)
     {
-        $this->assertEquals($result, serialize(AbcExp::byValue($value)));
+        $this->assertEquals($result, serialize(AbcRef::byValue($value)));
     }
 
     /**
@@ -106,7 +106,7 @@ class AbcExpTest extends \PHPUnit_Framework_TestCase
      */
     public function testUnserialize($value, $result)
     {
-        $this->assertEquals(AbcExp::byValue($value), unserialize($result));
+        $this->assertEquals(AbcRef::byValue($value), unserialize($result));
     }
 
     /**
@@ -114,7 +114,7 @@ class AbcExpTest extends \PHPUnit_Framework_TestCase
      */
     public function testClone()
     {
-        $abc = AbcExp::byValue(AbcExp::A);
+        $abc = AbcRef::a();
         $abc = clone $abc;
     }
 
@@ -123,27 +123,43 @@ class AbcExpTest extends \PHPUnit_Framework_TestCase
      */
     public function testValueNotSupported()
     {
-        AbcExp::byValue('foo');
+        AbcRef::byValue('foo');
+    }
+
+    /**
+     * @expectedException \GpsLab\Component\Enum\Exception\BadMethodCallException
+     */
+    public function testUndefinedNamedConstruct()
+    {
+        AbcRef::undefined();
+    }
+
+    /**
+     * @expectedException \GpsLab\Component\Enum\Exception\BadMethodCallException
+     */
+    public function testUndefinedMethod()
+    {
+        AbcRef::a()->undefined();
     }
 
     public function testIsA()
     {
-        $this->assertEquals(AbcExp::A, AbcExp::byValue(AbcExp::A)->value());
-        $this->assertTrue(AbcExp::byValue(AbcExp::A)->equals(AbcExp::byValue(AbcExp::A)));
-        $this->assertFalse(AbcExp::byValue(AbcExp::A)->equals(AbcExp::byValue(AbcExp::B)));
+        $this->assertEquals(AbcRef::A, AbcRef::a()->value());
+        $this->assertTrue(AbcRef::a()->isA());
+        $this->assertFalse(AbcRef::a()->isB());
     }
 
     public function testIsB()
     {
-        $this->assertEquals(AbcExp::B, AbcExp::byValue(AbcExp::B)->value());
-        $this->assertTrue(AbcExp::byValue(AbcExp::B)->equals(AbcExp::byValue(AbcExp::B)));
-        $this->assertFalse(AbcExp::byValue(AbcExp::B)->equals(AbcExp::byValue(AbcExp::A)));
+        $this->assertEquals(AbcRef::B, AbcRef::b()->value());
+        $this->assertTrue(AbcRef::b()->isB());
+        $this->assertFalse(AbcRef::b()->isA());
     }
 
     public function testIsC()
     {
-        $this->assertEquals(AbcExp::C, AbcExp::byValue(AbcExp::C)->value());
-        $this->assertTrue(AbcExp::byValue(AbcExp::C)->equals(AbcExp::byValue(AbcExp::C)));
-        $this->assertFalse(AbcExp::byValue(AbcExp::C)->equals(AbcExp::byValue(AbcExp::A)));
+        $this->assertEquals(AbcRef::C, AbcRef::c()->value());
+        $this->assertTrue(AbcRef::c()->isC());
+        $this->assertFalse(AbcRef::c()->isA());
     }
 }

@@ -6,38 +6,30 @@
  * @author Peter Gribanov <PGribanov@1tv.com>
  */
 
-namespace GpsLab\Component\Enum\Tests;
+namespace GpsLab\Component\Enum\Tests\Enum;
 
-use GpsLab\Component\Enum\Tests\Fixture\Enum\ConstAccess;
+use GpsLab\Component\Enum\Tests\Fixture\Enum\AbcExp;
 
-class ConstAccessTest extends \PHPUnit_Framework_TestCase
+class AbcExpTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var array
      */
-    private $choices = [];
-
-    public function setUp()
-    {
-        if (PHP_VERSION_ID < 70100) {
-            $this->markTestSkipped('This test is for PHP-7.1 and upper only');
-        }
-
-        $this->choices = [
-            ConstAccess::ACTION_GET => 'acme.demo.const_access.action_get',
-            ConstAccess::ACTION_POST => 'acme.demo.const_access.action_post',
-        ];
-    }
+    private $choices = [
+        AbcExp::A => 'acme.demo.abc.a',
+        AbcExp::B => 'acme.demo.abc.b',
+        AbcExp::C => 'acme.demo.abc.c',
+    ];
 
     public function testChoices()
     {
-        $this->assertEquals($this->choices, ConstAccess::choices());
+        $this->assertEquals($this->choices, AbcExp::choices());
     }
 
     public function testValues()
     {
         $values = [];
-        foreach (ConstAccess::values() as $value) {
+        foreach (AbcExp::values() as $value) {
             $values[] = $value->value();
         }
         sort($values);
@@ -66,13 +58,13 @@ class ConstAccessTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreate($value, $title)
     {
-        $this->assertTrue(ConstAccess::isValid($value));
+        $this->assertTrue(AbcExp::isValid($value));
 
-        $channel = ConstAccess::byValue($value);
+        $channel = AbcExp::byValue($value);
 
         $this->assertEquals($value, $channel->value());
         $this->assertEquals($title, (string) $channel);
-        $this->assertTrue($channel->equals(ConstAccess::byValue($value)));
+        $this->assertTrue($channel->equals(AbcExp::byValue($value)));
     }
 
     /**
@@ -80,7 +72,7 @@ class ConstAccessTest extends \PHPUnit_Framework_TestCase
      */
     public function getSerializeData()
     {
-        $class = 'GpsLab\Component\Enum\Tests\Enum\ConstVisibility';
+        $class = 'GpsLab\Component\Enum\Tests\Enum\AbcExp';
         $class_len = strlen($class);
 
         $data = [];
@@ -103,7 +95,7 @@ class ConstAccessTest extends \PHPUnit_Framework_TestCase
      */
     public function testSerialize($value, $result)
     {
-        $this->assertEquals($result, serialize(ConstAccess::byValue($value)));
+        $this->assertEquals($result, serialize(AbcExp::byValue($value)));
     }
 
     /**
@@ -114,7 +106,7 @@ class ConstAccessTest extends \PHPUnit_Framework_TestCase
      */
     public function testUnserialize($value, $result)
     {
-        $this->assertEquals(ConstAccess::byValue($value), unserialize($result));
+        $this->assertEquals(AbcExp::byValue($value), unserialize($result));
     }
 
     /**
@@ -122,8 +114,8 @@ class ConstAccessTest extends \PHPUnit_Framework_TestCase
      */
     public function testClone()
     {
-        $action = ConstAccess::actionGet();
-        $action = clone $action;
+        $abc = AbcExp::byValue(AbcExp::A);
+        $abc = clone $abc;
     }
 
     /**
@@ -131,29 +123,27 @@ class ConstAccessTest extends \PHPUnit_Framework_TestCase
      */
     public function testValueNotSupported()
     {
-        ConstAccess::byValue('foo');
+        AbcExp::byValue('foo');
     }
 
-    /**
-     * @expectedException \GpsLab\Component\Enum\Exception\BadMethodCallException
-     */
-    public function testUndefinedNamedConstruct()
+    public function testIsA()
     {
-        ConstAccess::undefined();
+        $this->assertEquals(AbcExp::A, AbcExp::byValue(AbcExp::A)->value());
+        $this->assertTrue(AbcExp::byValue(AbcExp::A)->equals(AbcExp::byValue(AbcExp::A)));
+        $this->assertFalse(AbcExp::byValue(AbcExp::A)->equals(AbcExp::byValue(AbcExp::B)));
     }
 
-    /**
-     * @expectedException \GpsLab\Component\Enum\Exception\BadMethodCallException
-     */
-    public function testUndefinedMethod()
+    public function testIsB()
     {
-        ConstAccess::actionGet()->undefined();
+        $this->assertEquals(AbcExp::B, AbcExp::byValue(AbcExp::B)->value());
+        $this->assertTrue(AbcExp::byValue(AbcExp::B)->equals(AbcExp::byValue(AbcExp::B)));
+        $this->assertFalse(AbcExp::byValue(AbcExp::B)->equals(AbcExp::byValue(AbcExp::A)));
     }
 
-    public function testIsRed()
+    public function testIsC()
     {
-        $this->assertEquals(ConstAccess::ACTION_GET, ConstAccess::actionGet()->value());
-        $this->assertTrue(ConstAccess::actionGet()->isActionGet());
-        $this->assertFalse(ConstAccess::actionGet()->isActionPost());
+        $this->assertEquals(AbcExp::C, AbcExp::byValue(AbcExp::C)->value());
+        $this->assertTrue(AbcExp::byValue(AbcExp::C)->equals(AbcExp::byValue(AbcExp::C)));
+        $this->assertFalse(AbcExp::byValue(AbcExp::C)->equals(AbcExp::byValue(AbcExp::A)));
     }
 }
