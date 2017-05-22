@@ -8,7 +8,7 @@
 
 namespace GpsLab\Component\Enum\Tests;
 
-use GpsLab\Component\Enum\Tests\Enum\AbcExp;
+use GpsLab\Component\Enum\Tests\Fixture\Enum\AbcExp;
 
 class AbcExpTest extends \PHPUnit_Framework_TestCase
 {

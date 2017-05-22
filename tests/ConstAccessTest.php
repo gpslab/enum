@@ -8,7 +8,7 @@
 
 namespace GpsLab\Component\Enum\Tests;
 
-use GpsLab\Component\Enum\Tests\Enum\ConstAccess;
+use GpsLab\Component\Enum\Tests\Fixture\Enum\ConstAccess;
 
 class ConstAccessTest extends \PHPUnit_Framework_TestCase
 {

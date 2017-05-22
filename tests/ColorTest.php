@@ -8,7 +8,7 @@
 
 namespace GpsLab\Component\Enum\Tests;
 
-use GpsLab\Component\Enum\Tests\Enum\ColorBW;
+use GpsLab\Component\Enum\Tests\Fixture\Enum\ColorBW;
 
 class ColorTest extends \PHPUnit_Framework_TestCase
 {

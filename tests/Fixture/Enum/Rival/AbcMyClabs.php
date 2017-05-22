@@ -8,7 +8,7 @@
  * @license   http://opensource.org/licenses/MIT
  */
 
-namespace GpsLab\Component\Enum\Tests\Enum\Rival;
+namespace GpsLab\Component\Enum\Tests\Fixture\Enum\Rival;
 
 use MyCLabs\Enum\Enum;
 

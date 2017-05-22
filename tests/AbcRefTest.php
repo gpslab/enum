@@ -8,7 +8,7 @@
 
 namespace GpsLab\Component\Enum\Tests;
 
-use GpsLab\Component\Enum\Tests\Enum\AbcRef;
+use GpsLab\Component\Enum\Tests\Fixture\Enum\AbcRef;
 
 class AbcRefTest extends \PHPUnit_Framework_TestCase
 {
