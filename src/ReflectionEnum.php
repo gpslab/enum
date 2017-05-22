@@ -141,7 +141,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
         if (!isset(self::$choices[$class])) {
             self::$choices[$class] = [];
             foreach (self::constants() as $value) {
-                self::$choices[$class][$value] = (string)self::byValue($value);
+                self::$choices[$class][$value] = (string) self::byValue($value);
             }
         }
 

@@ -106,7 +106,6 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
 
     public function testEqual()
     {
-
         foreach ($this->choices as $value => $title) {
             $this->b->attach($value);
         }
