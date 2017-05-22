@@ -152,10 +152,28 @@ class ConstAccessTest extends \PHPUnit_Framework_TestCase
         ConstAccess::actionGet()->undefined();
     }
 
-    public function testIsRed()
+    public function testIsActionGet()
     {
         $this->assertEquals(ConstAccess::ACTION_GET, ConstAccess::actionGet()->value());
         $this->assertTrue(ConstAccess::actionGet()->isActionGet());
         $this->assertFalse(ConstAccess::actionGet()->isActionPost());
+    }
+
+    public function testIsActionPost()
+    {
+        $this->assertEquals(ConstAccess::ACTION_POST, ConstAccess::actionPost()->value());
+        $this->assertTrue(ConstAccess::actionPost()->isActionPost());
+        $this->assertFalse(ConstAccess::actionPost()->isActionGet());
+    }
+
+    public function testCreateStatic()
+    {
+        $ref = new \ReflectionClass('GpsLab\Component\Enum\ReflectionEnum');
+        // method setStaticPropertyValue() is not work for private properties
+        $property = $ref->getProperty('instances');
+        $property->setAccessible(true);
+        $property->setValue([]);
+
+        ConstAccess::actionGet();
     }
 }

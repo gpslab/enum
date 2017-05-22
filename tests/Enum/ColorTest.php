@@ -178,4 +178,15 @@ class ColorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(ColorBW::white()->isWhite());
         $this->assertFalse(ColorBW::white()->isRed());
     }
+
+    public function testCreateStatic()
+    {
+        $ref = new \ReflectionClass('GpsLab\Component\Enum\ReflectionEnum');
+        // method setStaticPropertyValue() is not work for private properties
+        $property = $ref->getProperty('instances');
+        $property->setAccessible(true);
+        $property->setValue([]);
+
+        ColorBW::red();
+    }
 }

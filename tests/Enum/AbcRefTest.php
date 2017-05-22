@@ -162,4 +162,15 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(AbcRef::c()->isC());
         $this->assertFalse(AbcRef::c()->isA());
     }
+
+    public function testCreateStatic()
+    {
+        $ref = new \ReflectionClass('GpsLab\Component\Enum\ReflectionEnum');
+        // method setStaticPropertyValue() is not work for private properties
+        $property = $ref->getProperty('instances');
+        $property->setAccessible(true);
+        $property->setValue([]);
+
+        AbcRef::a();
+    }
 }
