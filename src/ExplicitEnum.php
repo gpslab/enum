@@ -70,7 +70,7 @@ abstract class ExplicitEnum implements Enum, \Serializable
     {
         $values = [];
         foreach (static::choices() as $value => $label) {
-            $values[$label] = $value;
+            $values[$label] = self::byValue($value);
         }
 
         return $values;
