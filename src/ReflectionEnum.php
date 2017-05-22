@@ -30,10 +30,6 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     private static $create_methods = [];
 
-    /**
-     * @var mixed[][]
-     */
-    private static $is_methods = [];
 
     /**
      * @var mixed[][]
@@ -44,6 +40,11 @@ abstract class ReflectionEnum implements Enum, \Serializable
      * @var mixed[][]
      */
     private static $choices = [];
+
+    /**
+     * @var EnumEnum[]
+     */
+    private static $values = [];
 
     /**
      * @param mixed $value
@@ -92,12 +93,16 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     final public static function values()
     {
-        $values = [];
-        foreach (self::constants() as $constant => $value) {
-            $values[$constant] = self::byValue($value);
+        $class = get_called_class();
+
+        if (!isset(self::$values[$class])) {
+            self::$values[$class] = [];
+            foreach (self::constants() as $constant => $value) {
+                self::$values[$class][$constant] = self::byValue($value);
+            }
         }
 
-        return $values;
+        return self::$values[$class];
     }
 
     /**
