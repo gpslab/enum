@@ -16,9 +16,9 @@ notifications:
 matrix:
     fast_finish: true
     include:
-        - php: 5.4
-          env: COVERAGE=1
         - php: 7.1
+          env: COVERAGE=1
+        - php: 5.4
           env: COVERAGE=1
         - php: 7.1
           env: BENCHMARK=1

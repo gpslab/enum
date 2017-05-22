@@ -37,7 +37,7 @@ abstract class ExplicitEnum implements Enum, \Serializable
      *
      * @return Enum
      */
-    final public static function create($value)
+    final public static function byValue($value)
     {
         $key = get_called_class().'|'.$value;
 
@@ -126,6 +126,6 @@ abstract class ExplicitEnum implements Enum, \Serializable
      */
     public function unserialize($data)
     {
-        static::create($this->value = $data);
+        static::byValue($this->value = $data);
     }
 }

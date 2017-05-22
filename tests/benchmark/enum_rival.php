@@ -43,13 +43,13 @@ echo $sw->stop('ref').PHP_EOL;
 // Reflection (no magic)
 $sw->start('nmag', 'Reflection enum no magic');
 for ($i = 0; $i < $N; ++$i) {
-    $d = DefRef::create(DefRef::D);
-    $d->equals(DefRef::create(DefRef::D));
+    $d = DefRef::byValue(DefRef::D);
+    $d->equals(DefRef::byValue(DefRef::D));
 
-    $e = DefRef::create(DefRef::E);
-    $e->equals(DefRef::create(DefRef::D));
+    $e = DefRef::byValue(DefRef::E);
+    $e->equals(DefRef::byValue(DefRef::D));
 
-    $f = DefRef::create(DefRef::F);
+    $f = DefRef::byValue(DefRef::F);
     $z = (string) $f;
 
     DefRef::choices();
@@ -128,13 +128,13 @@ echo $sw->stop('ht').PHP_EOL;
 // Explicit
 $sw->start('exp', 'Explicit enum');
 for ($i = 0; $i < $N; ++$i) {
-    $a = AbcExp::create(AbcExp::A);
-    $a->equals(AbcExp::create(AbcExp::A));
+    $a = AbcExp::byValue(AbcExp::A);
+    $a->equals(AbcExp::byValue(AbcExp::A));
 
-    $b = AbcExp::create(AbcExp::B);
-    $b->equals(AbcExp::create(AbcExp::A));
+    $b = AbcExp::byValue(AbcExp::B);
+    $b->equals(AbcExp::byValue(AbcExp::A));
 
-    $c = AbcExp::create(AbcExp::C);
+    $c = AbcExp::byValue(AbcExp::C);
     $e = (string) $c;
 
     AbcExp::choices();

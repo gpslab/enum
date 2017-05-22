@@ -17,7 +17,7 @@ interface Enum
      *
      * @return self
      */
-    public static function create($value);
+    public static function byValue($value);
 
     /**
      * @return mixed
