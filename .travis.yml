@@ -30,6 +30,8 @@ matrix:
           env: BENCHMARK=1
         - php: 5.4
           env: BENCHMARK=1
+        - php: hhvm
+          env: BENCHMARK=1
 
 before_install:
     - if [ "$TRAVIS_PHP_VERSION" != "hhvm" ] && [ "$COVERAGE" != "1" ]; then phpenv config-rm xdebug.ini; fi;
