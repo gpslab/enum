@@ -33,7 +33,7 @@ class Set
     /**
      * @param array $values
      */
-    public function __construct(array $values = [])
+    final public function __construct(array $values = [])
     {
         foreach ($values as $value) {
             $this->attach($value);
@@ -43,7 +43,7 @@ class Set
     /**
      * @return mixed[]
      */
-    public function values()
+    final public function values()
     {
         if (!$this->bit) {
             return [];
@@ -64,7 +64,7 @@ class Set
      *
      * @param mixed $value
      */
-    public function attach($value)
+    final public function attach($value)
     {
         self::validateValue($value);
 
@@ -76,7 +76,7 @@ class Set
      *
      * @param mixed $value
      */
-    public function detach($value)
+    final public function detach($value)
     {
         self::validateValue($value);
 
@@ -90,7 +90,7 @@ class Set
      *
      * @return bool
      */
-    public function contains($value)
+    final public function contains($value)
     {
         self::validateValue($value);
 
@@ -104,7 +104,7 @@ class Set
      *
      * @return bool
      */
-    public static function isValid($value)
+    final public static function isValid($value)
     {
         return in_array($value, self::bits(), true);
     }
@@ -116,7 +116,7 @@ class Set
      *
      * @return bool
      */
-    public function equal(Set $set)
+    final public function equal(Set $set)
     {
         self::validateType($set);
 
@@ -130,7 +130,7 @@ class Set
      *
      * @return bool
      */
-    public function subset(Set $set)
+    final public function subset(Set $set)
     {
         self::validateType($set);
 
@@ -144,7 +144,7 @@ class Set
      *
      * @return bool
      */
-    public function superset(Set $set)
+    final public function superset(Set $set)
     {
         self::validateType($set);
 
@@ -158,7 +158,7 @@ class Set
      *
      * @return Set
      */
-    public function union(Set $set)
+    final public function union(Set $set)
     {
         $bit = $this->bit;
         foreach (func_get_args() as $set) {
@@ -180,7 +180,7 @@ class Set
      *
      * @return Set
      */
-    public function intersect(Set $set)
+    final public function intersect(Set $set)
     {
         $bit = $this->bit;
         foreach (func_get_args() as $set) {
@@ -202,7 +202,7 @@ class Set
      *
      * @return Set
      */
-    public function diff(Set $set)
+    final public function diff(Set $set)
     {
         $bit = 0;
         foreach (func_get_args() as $set) {
@@ -224,7 +224,7 @@ class Set
      *
      * @return Set
      */
-    public function symDiff(Set $set)
+    final public function symDiff(Set $set)
     {
         $bit = 0;
         foreach (func_get_args() as $set) {
@@ -251,7 +251,7 @@ class Set
      *
      * @return array
      */
-    public static function choices()
+    final public static function choices()
     {
         $class = get_called_class();
         self::detectConstants($class);
