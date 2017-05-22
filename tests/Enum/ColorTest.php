@@ -74,7 +74,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
      */
     public function getSerializeData()
     {
-        $class = 'GpsLab\Component\Enum\Tests\Enum\ColorBW';
+        $class = 'GpsLab\Component\Enum\Tests\Fixture\Enum\ColorBW';
         $class_len = strlen($class);
 
         $data = [];

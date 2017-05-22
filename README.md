@@ -23,7 +23,9 @@ is a data type consisting of a set of named values called **elements**, members 
 ### SplEnum
 
 [SplEnum](http://php.net/manual/en/class.splenum.php) is not integrated to PHP,
-you have to install it separately: `$ sudo pecl install SPL_Types`.
+you have to install it separately:
+
+`$ sudo pecl install SPL_Types`.
 
 In addition, it's not a panacea:
 
@@ -47,6 +49,8 @@ var_dump($jan === $jan2);          // false
 var_dump($jan === Month::JANUARY); // false
 var_dump($jan ==  Fruit::APPLE);   // true
 ```
+
+This library is support [PSR-2](http://www.php-fig.org/psr/psr-2/).
 
 ### How to get enum with default value?
 

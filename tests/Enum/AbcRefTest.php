@@ -72,7 +72,7 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
      */
     public function getSerializeData()
     {
-        $class = 'GpsLab\Component\Enum\Tests\Enum\AbcRef';
+        $class = 'GpsLab\Component\Enum\Tests\Fixture\Enum\AbcRef';
         $class_len = strlen($class);
 
         $data = [];
