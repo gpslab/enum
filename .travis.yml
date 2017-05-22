@@ -41,8 +41,8 @@ before_script:
     - composer install --prefer-dist --no-interaction --no-scripts --no-progress
 
 script:
-    - if [ "$COVERAGE" != "1" ] && [ "$BENCHMARK" != "1" ]; then vendor/bin/phpunit; fi;
-    - if [ "$COVERAGE" == "1" ] && [ "$BENCHMARK" != "1" ]; then vendor/bin/phpunit --coverage-clover build/coverage-clover.xml; fi;
+    - if [ "$COVERAGE" != "1" ] && [ "$BENCHMARK" != "1" ]; then vendor/bin/phpunit --verbose; fi;
+    - if [ "$COVERAGE" == "1" ] && [ "$BENCHMARK" != "1" ]; then vendor/bin/phpunit --verbose --coverage-clover build/coverage-clover.xml; fi;
     - if [ "$BENCHMARK" == "1" ]; then php tests/benchmark/enum_rival.php 100000; fi;
 
 after_script:
