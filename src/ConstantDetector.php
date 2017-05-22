@@ -28,11 +28,13 @@ class ConstantDetector
                     $constants[$constant->getName()] = $constant->getValue();
                 }
             }
-        } else {
-            // In PHP < 7.1 all class constants were public by definition
-            foreach ($reflection->getConstants() as $constant_name => $constant_value) {
-                $constants[$constant_name] = $constant_value;
-            }
+
+            return $constants;
+        }
+
+        // In PHP < 7.1 all class constants were public by definition
+        foreach ($reflection->getConstants() as $constant_name => $constant_value) {
+            $constants[$constant_name] = $constant_value;
         }
 
         return $constants;
