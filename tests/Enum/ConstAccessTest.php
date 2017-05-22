@@ -50,6 +50,7 @@ class ConstAccessTest extends \PHPUnit_Framework_TestCase
      */
     public function getChoicesData()
     {
+        $this->setUp();
         $data = [];
         foreach ($this->choices as $value => $title) {
             $data[] = [$value, $title];
@@ -80,6 +81,7 @@ class ConstAccessTest extends \PHPUnit_Framework_TestCase
      */
     public function getSerializeData()
     {
+        $this->setUp();
         $class = 'GpsLab\Component\Enum\Tests\Enum\ConstVisibility';
         $class_len = strlen($class);
 
