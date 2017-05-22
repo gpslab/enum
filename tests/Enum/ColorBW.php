@@ -16,6 +16,7 @@ namespace GpsLab\Component\Enum\Tests\Enum;
  * @method static ColorBW blue()
  * @method bool isBlack()
  * @method bool isWhite()
+ * @method static ColorBW byValue($value)
  */
 class ColorBW extends ColorRGB
 {
