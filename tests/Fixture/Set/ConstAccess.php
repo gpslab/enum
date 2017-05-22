@@ -12,10 +12,10 @@ use GpsLab\Component\Enum\Set;
 
 class ConstAccess extends Set
 {
+    private const OPTION_PUT = 'put';
+    protected const OPTION_DELETE = 'delete';
     public const ACTION_GET = 'get';
     public const ACTION_POST = 'post';
-    protected const OPTION_DELETE = 'delete';
-    private const OPTION_PUT = 'put';
 
     /**
      * @param mixed $value
