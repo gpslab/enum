@@ -30,6 +30,10 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     private static $create_methods = [];
 
+    /**
+     * @var mixed[][]
+     */
+    private static $is_methods = [];
 
     /**
      * @var mixed[][]
