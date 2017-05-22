@@ -21,9 +21,9 @@ use GpsLab\Component\Enum\ReflectionEnum;
  */
 class ColorRGB extends ReflectionEnum
 {
-    public const RED = 1;
-    private const GREEN = 2;
-    protected const BLUE = 3;
+    const RED = 1;
+    const GREEN = 2;
+    const BLUE = 3;
 
     /**
      * @return string

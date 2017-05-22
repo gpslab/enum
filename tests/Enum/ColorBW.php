@@ -20,6 +20,6 @@ namespace GpsLab\Component\Enum\Tests\Enum;
  */
 class ColorBW extends ColorRGB
 {
-    public const BLACK = 4;
-    private const WHITE = 5;
+    const BLACK = 4;
+    const WHITE = 5;
 }

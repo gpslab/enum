@@ -8,30 +8,36 @@
 
 namespace GpsLab\Component\Enum\Tests;
 
-use GpsLab\Component\Enum\Tests\Enum\ColorBW;
+use GpsLab\Component\Enum\Tests\Enum\ConstAccess;
 
-class ColorTest extends \PHPUnit_Framework_TestCase
+class ConstAccessTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var array
      */
-    private $choices = [
-        ColorBW::RED => 'acme.demo.color.red',
-        ColorBW::GREEN => 'acme.demo.color.green',
-        ColorBW::BLUE => 'acme.demo.color.blue',
-        ColorBW::BLACK => 'acme.demo.color.black',
-        ColorBW::WHITE => 'acme.demo.color.white',
-    ];
+    private $choices = [];
+
+    public function setUp()
+    {
+        if (PHP_VERSION_ID < 70100) {
+            $this->markTestSkipped('This test is for PHP-7.1 and upper only');
+        }
+
+        $this->choices = [
+            ConstAccess::ACTION_GET => 'acme.demo.const_access.action_get',
+            ConstAccess::ACTION_POST => 'acme.demo.const_access.action_post',
+        ];
+    }
 
     public function testChoices()
     {
-        $this->assertEquals($this->choices, ColorBW::choices());
+        $this->assertEquals($this->choices, ConstAccess::choices());
     }
 
     public function testValues()
     {
         $values = [];
-        foreach (ColorBW::values() as $value) {
+        foreach (ConstAccess::values() as $value) {
             $values[] = $value->value();
         }
         sort($values);
@@ -60,13 +66,13 @@ class ColorTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreate($value, $title)
     {
-        $this->assertTrue(ColorBW::isValid($value));
+        $this->assertTrue(ConstAccess::isValid($value));
 
-        $channel = ColorBW::byValue($value);
+        $channel = ConstAccess::byValue($value);
 
         $this->assertEquals($value, $channel->value());
         $this->assertEquals($title, (string) $channel);
-        $this->assertTrue($channel->equals(ColorBW::byValue($value)));
+        $this->assertTrue($channel->equals(ConstAccess::byValue($value)));
     }
 
     /**
@@ -74,7 +80,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
      */
     public function getSerializeData()
     {
-        $class = 'GpsLab\Component\Enum\Tests\Enum\ColorBW';
+        $class = 'GpsLab\Component\Enum\Tests\Enum\ConstVisibility';
         $class_len = strlen($class);
 
         $data = [];
@@ -97,7 +103,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSerialize($value, $result)
     {
-        $this->assertEquals($result, serialize(ColorBW::byValue($value)));
+        $this->assertEquals($result, serialize(ConstAccess::byValue($value)));
     }
 
     /**
@@ -108,7 +114,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
      */
     public function testUnserialize($value, $result)
     {
-        $this->assertEquals(ColorBW::byValue($value), unserialize($result));
+        $this->assertEquals(ConstAccess::byValue($value), unserialize($result));
     }
 
     /**
@@ -116,8 +122,8 @@ class ColorTest extends \PHPUnit_Framework_TestCase
      */
     public function testClone()
     {
-        $color = ColorBW::red();
-        $color = clone $color;
+        $action = ConstAccess::actionGet();
+        $action = clone $action;
     }
 
     /**
@@ -125,7 +131,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
      */
     public function testValueNotSupported()
     {
-        ColorBW::byValue('foo');
+        ConstAccess::byValue('foo');
     }
 
     /**
@@ -133,7 +139,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
      */
     public function testUndefinedNamedConstruct()
     {
-        ColorBW::undefined();
+        ConstAccess::undefined();
     }
 
     /**
@@ -141,41 +147,13 @@ class ColorTest extends \PHPUnit_Framework_TestCase
      */
     public function testUndefinedMethod()
     {
-        ColorBW::red()->undefined();
+        ConstAccess::actionGet()->undefined();
     }
 
     public function testIsRed()
     {
-        $this->assertEquals(ColorBW::RED, ColorBW::red()->value());
-        $this->assertTrue(ColorBW::red()->isRed());
-        $this->assertFalse(ColorBW::red()->isGreen());
-    }
-
-    public function testIsGreen()
-    {
-        $this->assertEquals(ColorBW::GREEN, ColorBW::green()->value());
-        $this->assertTrue(ColorBW::green()->isGreen());
-        $this->assertFalse(ColorBW::green()->isRed());
-    }
-
-    public function testIsBlue()
-    {
-        $this->assertEquals(ColorBW::BLUE, ColorBW::blue()->value());
-        $this->assertTrue(ColorBW::blue()->isBlue());
-        $this->assertFalse(ColorBW::blue()->isRed());
-    }
-
-    public function testIsBlack()
-    {
-        $this->assertEquals(ColorBW::BLACK, ColorBW::black()->value());
-        $this->assertTrue(ColorBW::black()->isBlack());
-        $this->assertFalse(ColorBW::black()->isRed());
-    }
-
-    public function testIsWhite()
-    {
-        $this->assertEquals(ColorBW::WHITE, ColorBW::white()->value());
-        $this->assertTrue(ColorBW::white()->isWhite());
-        $this->assertFalse(ColorBW::white()->isRed());
+        $this->assertEquals(ConstAccess::ACTION_GET, ConstAccess::actionGet()->value());
+        $this->assertTrue(ConstAccess::actionGet()->isActionGet());
+        $this->assertFalse(ConstAccess::actionGet()->isActionPost());
     }
 }
