@@ -46,7 +46,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
     private static $choices = [];
 
     /**
-     * @var EnumEnum[]
+     * @var Enum[]
      */
     private static $values = [];
 
