@@ -180,25 +180,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
             self::$is_methods[$class] = [];
             self::$constants[$class] = [];
 
-            $constants = [];
-            $reflection = new \ReflectionClass($class);
-
-            if (PHP_VERSION_ID >= 70100) {
-                // Since PHP-7.1 visibility modifiers are allowed for class constants
-                // for enumerations we are only interested in public once.
-                foreach ($reflection->getReflectionConstants() as $refl_constant) {
-                    if ($refl_constant->isPublic()) {
-                        $constants[$refl_constant->getName()] = $refl_constant->getValue();
-                    }
-                }
-            } else {
-                // In PHP < 7.1 all class constants were public by definition
-                foreach ($reflection->getConstants() as $constant => $constant_value) {
-                    $constants[$constant] = $constant_value;
-                }
-            }
-
-            foreach ($constants as $constant => $constant_value) {
+            foreach (ConstantDetector::detect($class) as $constant => $constant_value) {
                 self::$constants[$class][$constant] = $constant_value;
 
                 // second parameter of ucwords() is not supported on HHVM

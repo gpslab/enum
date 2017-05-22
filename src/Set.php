@@ -305,26 +305,9 @@ class Set
         if (!isset(self::$bits[$class])) {
             self::$keys[$class] = [];
             self::$bits[$class] = [];
-            $constants = [];
-            $reflection = new \ReflectionClass($class);
-
-            if (PHP_VERSION_ID >= 70100) {
-                // Since PHP-7.1 visibility modifiers are allowed for class constants
-                // for enumerations we are only interested in public once.
-                foreach ($reflection->getReflectionConstants() as $refl_constant) {
-                    if ($refl_constant->isPublic()) {
-                        $constants[$refl_constant->getName()] = $refl_constant->getValue();
-                    }
-                }
-            } else {
-                // In PHP < 7.1 all class constants were public by definition
-                foreach ($reflection->getConstants() as $constant => $constant_value) {
-                    $constants[$constant] = $constant_value;
-                }
-            }
 
             $bit = 1;
-            foreach ($constants as $constant => $constant_value) {
+            foreach (ConstantDetector::detect($class) as $constant => $constant_value) {
                 self::$keys[$class][$constant] = $constant_value;
                 self::$bits[$class][$bit] = $constant_value;
                 $bit += $bit;
