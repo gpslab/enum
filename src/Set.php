@@ -167,7 +167,7 @@ class Set
             $bit |= $set->bit;
         }
 
-        $clone = new self();
+        $clone = new static();
         $clone->bit = $bit;
 
         return $clone;
@@ -189,7 +189,7 @@ class Set
             $bit &= $set->bit;
         }
 
-        $clone = new self();
+        $clone = new static();
         $clone->bit = $bit;
 
         return $clone;
@@ -211,7 +211,7 @@ class Set
             $bit |= $set->bit;
         }
 
-        $clone = new self();
+        $clone = new static();
         $clone->bit = $this->bit & ~$bit;
 
         return $clone;
@@ -233,7 +233,7 @@ class Set
             $bit |= $set->bit;
         }
 
-        $clone = new self();
+        $clone = new static();
         $clone->bit = $this->bit ^ $bit;
 
         return $clone;
