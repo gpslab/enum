@@ -4,34 +4,34 @@ sudo: false
 
 php:
     - 7.1
-    - 7.0
-    - 5.6
-    - 5.5
-    - 5.4
-    - hhvm
+#    - 7.0
+#    - 5.6
+#    - 5.5
+#    - 5.4
+#    - hhvm
 
 notifications:
     email: deploy@peter-gribanov.ru
 
 matrix:
     fast_finish: true
-    include:
-        - php: 7.1
-          env: COVERAGE=1
-        - php: 5.4
-          env: COVERAGE=1
-        - php: 7.1
-          env: BENCHMARK=1
-        - php: 7.0
-          env: BENCHMARK=1
-        - php: 5.6
-          env: BENCHMARK=1
-        - php: 5.5
-          env: BENCHMARK=1
-        - php: 5.4
-          env: BENCHMARK=1
-        - php: hhvm
-          env: BENCHMARK=1
+#    include:
+#        - php: 7.1
+#          env: COVERAGE=1
+#        - php: 5.4
+#          env: COVERAGE=1
+#        - php: 7.1
+#          env: BENCHMARK=1
+#        - php: 7.0
+#          env: BENCHMARK=1
+#        - php: 5.6
+#          env: BENCHMARK=1
+#        - php: 5.5
+#          env: BENCHMARK=1
+#        - php: 5.4
+#          env: BENCHMARK=1
+#        - php: hhvm
+#          env: BENCHMARK=1
 
 before_install:
     - if [ "$TRAVIS_PHP_VERSION" != "hhvm" ] && [ "$COVERAGE" != "1" ]; then phpenv config-rm xdebug.ini; fi;
