@@ -17,10 +17,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
      */
     private $choices = [
         ColorBW::RED => 'acme.demo.color.red',
-        ColorBW::GREEN => 'acme.demo.color.green',
-        ColorBW::BLUE => 'acme.demo.color.blue',
         ColorBW::BLACK => 'acme.demo.color.black',
-        ColorBW::WHITE => 'acme.demo.color.white',
     ];
 
     public function testChoices()
@@ -151,31 +148,10 @@ class ColorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(ColorBW::red()->isGreen());
     }
 
-    public function testIsGreen()
-    {
-        $this->assertEquals(ColorBW::GREEN, ColorBW::green()->value());
-        $this->assertTrue(ColorBW::green()->isGreen());
-        $this->assertFalse(ColorBW::green()->isRed());
-    }
-
-    public function testIsBlue()
-    {
-        $this->assertEquals(ColorBW::BLUE, ColorBW::blue()->value());
-        $this->assertTrue(ColorBW::blue()->isBlue());
-        $this->assertFalse(ColorBW::blue()->isRed());
-    }
-
     public function testIsBlack()
     {
         $this->assertEquals(ColorBW::BLACK, ColorBW::black()->value());
         $this->assertTrue(ColorBW::black()->isBlack());
         $this->assertFalse(ColorBW::black()->isRed());
-    }
-
-    public function testIsWhite()
-    {
-        $this->assertEquals(ColorBW::WHITE, ColorBW::white()->value());
-        $this->assertTrue(ColorBW::white()->isWhite());
-        $this->assertFalse(ColorBW::white()->isRed());
     }
 }
