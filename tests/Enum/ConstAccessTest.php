@@ -82,7 +82,7 @@ class ConstAccessTest extends \PHPUnit_Framework_TestCase
     public function getSerializeData()
     {
         $this->setUp();
-        $class = 'GpsLab\Component\Enum\Tests\Fixture\Enum\ConstVisibility';
+        $class = 'GpsLab\Component\Enum\Tests\Fixture\Enum\ConstAccess';
         $class_len = strlen($class);
 
         $data = [];
