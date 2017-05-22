@@ -51,10 +51,7 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
 
     public function testValues()
     {
-        foreach ($this->choices as $value => $title) {
-            $this->a->attach($value);
-        }
-
+        $this->assertEquals([], $this->b->values());
         $this->assertEquals(array_keys($this->choices), $this->a->values());
     }
 
