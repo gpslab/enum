@@ -74,12 +74,15 @@ class ColorTest extends \PHPUnit_Framework_TestCase
      */
     public function getSerializeData()
     {
+        $class = 'GpsLab\Component\Enum\Tests\Enum\ColorBW';
+        $class_len = strlen($class);
+
         $data = [];
         foreach ($this->choices as $value => $title) {
             $ser = serialize($value);
             $data[] = [
                 $value,
-                sprintf('C:%d:"%s":%d:{%s}', strlen(ColorBW::class), ColorBW::class, strlen($ser), $ser),
+                sprintf('C:%d:"%s":%d:{%s}', $class_len, $class, strlen($ser), $ser),
             ];
         }
 
