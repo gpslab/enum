@@ -118,7 +118,7 @@ abstract class ExplicitEnum implements Enum, \Serializable
      */
     public function serialize()
     {
-        return $this->value;
+        return serialize($this->value);
     }
 
     /**
@@ -126,6 +126,6 @@ abstract class ExplicitEnum implements Enum, \Serializable
      */
     public function unserialize($data)
     {
-        static::byValue($this->value = $data);
+        static::byValue($this->value = unserialize($data));
     }
 }

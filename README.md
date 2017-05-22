@@ -48,7 +48,6 @@ var_dump($jan === Month::JANUARY); // false
 var_dump($jan ==  Fruit::APPLE);   // true
 ```
 
-
 ### How to get enum with default value?
 
 ```php

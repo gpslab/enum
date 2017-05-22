@@ -159,7 +159,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     public function serialize()
     {
-        return $this->value;
+        return serialize($this->value);
     }
 
     /**
@@ -167,7 +167,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     public function unserialize($data)
     {
-        self::byValue($this->value = $data);
+        self::byValue($this->value = unserialize($data));
     }
 
     /**
