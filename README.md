@@ -47,3 +47,23 @@ var_dump($jan === $jan2);          // false
 var_dump($jan === Month::JANUARY); // false
 var_dump($jan ==  Fruit::APPLE);   // true
 ```
+
+
+### How to get enum with default value?
+
+```php
+final class Color extends ReflectionEnum
+{
+    const RED = 1;
+    const GREEN = 2;
+    const BLUE = 3;
+
+    /**
+     * @return Color
+     */
+    public static function byDefault()
+    {
+        return self::byValue(self::RED);
+    }
+}
+```
