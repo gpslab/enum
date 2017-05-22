@@ -58,7 +58,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
      * @param string $value
      * @param string $title
      */
-    public function testCreate($value, $title)
+    public function testByValue($value, $title)
     {
         $this->assertTrue(ColorBW::isValid($value));
 
