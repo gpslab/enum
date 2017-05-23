@@ -60,13 +60,13 @@ $ tests/benchmark/enum.php 100000
  ------------------------------- ------------ --------------
   Test                            Memory Avg   Duration All
  ------------------------------- ------------ --------------
-  Reflection enum                 3.29 KiB     2091 ms
-  Reflection enum (no magic)      3.29 KiB     2157 ms
-  Explicit enum                   0.77 KiB     859 ms
-  myclabs/php-enum                0.73 KiB     1770 ms
-  marc-mabe/php-enum              1.70 KiB     2291 ms
-  marc-mabe/php-enum (no magic)   1.70 KiB     1978 ms
-  happy-types/enumerable-type     1.82 KiB     2240 ms
+  Reflection enum                 1.63 KiB     1813 ms
+  Reflection enum (no magic)      1.63 KiB     1762 ms
+  Explicit enum                   0.77 KiB     796 ms
+  myclabs/php-enum                0.73 KiB     1751 ms
+  marc-mabe/php-enum              1.70 KiB     2310 ms
+  marc-mabe/php-enum (no magic)   1.70 KiB     1994 ms
+  happy-types/enumerable-type     1.82 KiB     2182 ms
  ------------------------------- ------------ --------------
 ```
 
@@ -78,8 +78,8 @@ $ tests/benchmark/set.php 100000
  -------------------- ------------ --------------
   Test                 Memory Avg   Duration All
  -------------------- ------------ --------------
-  Reflection set       1.47 KiB     1282 ms
-  marc-mabe/php-enum   1.70 KiB     2782 ms
+  Reflection set       1.47 KiB     1209 ms
+  marc-mabe/php-enum   1.70 KiB     2716 ms
  -------------------- ------------ --------------
 ```
 
