@@ -34,7 +34,5 @@ function clear_refnm()
         'create_methods',
         'is_methods',
         'constants',
-        'choices',
-        'values',
     ]);
 }

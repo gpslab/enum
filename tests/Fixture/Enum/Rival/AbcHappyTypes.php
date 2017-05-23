@@ -15,11 +15,6 @@ use HappyTypes\EnumerableType;
 class AbcHappyTypes extends EnumerableType
 {
     /**
-     * @var mixed[][]
-     */
-    private static $choices = [];
-
-    /**
      * @return self
      */
     final public static function A()
@@ -71,16 +66,12 @@ class AbcHappyTypes extends EnumerableType
      */
     public static function choices()
     {
-        $class = get_called_class();
-
-        if (!isset(self::$choices[$class])) {
-            self::$choices[$class] = [];
-            foreach (static::values() as $value) {
-                self::$choices[$class][$value->id()] = (string) $value;
-            }
+        $choices = [];
+        foreach (static::values() as $value) {
+            $choices[$value->id()] = (string) $value;
         }
 
-        return self::$choices[$class];
+        return $choices;
     }
 
     /**

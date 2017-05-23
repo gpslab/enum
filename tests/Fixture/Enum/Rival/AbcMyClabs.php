@@ -24,25 +24,16 @@ class AbcMyClabs extends Enum
     const C = 3;
 
     /**
-     * @var mixed[][]
-     */
-    private static $choices = [];
-
-    /**
      * @return array
      */
     public static function choices()
     {
-        $class = get_called_class();
-
-        if (!isset(self::$choices[$class])) {
-            self::$choices[$class] = [];
-            foreach (self::values() as $value) {
-                self::$choices[$class][$value->getValue()] = (string) $value;
-            }
+        $choices = [];
+        foreach (self::values() as $value) {
+            $choices[$value->getValue()] = (string) $value;
         }
 
-        return self::$choices[$class];
+        return $choices;
     }
 
     /**

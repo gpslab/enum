@@ -29,6 +29,5 @@ function test_mm()
 
 function clear_mm()
 {
-    reset_class('GpsLab\Component\Enum\Tests\Fixture\Enum\Rival\AbcMarcMabe', ['choices']);
     reset_class('MabeEnum\Enum', ['constants', 'instances']);
 }

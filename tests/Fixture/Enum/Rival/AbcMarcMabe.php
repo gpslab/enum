@@ -24,25 +24,16 @@ class AbcMarcMabe extends Enum
     const C = 3;
 
     /**
-     * @var mixed[][]
-     */
-    private static $choices = [];
-
-    /**
      * @return Enum[]
      */
     public static function values()
     {
-        $class = get_called_class();
-
-        if (!isset(self::$choices[$class])) {
-            self::$choices[$class] = [];
-            foreach (self::getConstants() as $name => $value) {
-                self::$choices[$class][$name] = self::byValue($value);
-            }
+        $values = [];
+        foreach (self::getConstants() as $name => $value) {
+            $values[$name] = self::byValue($value);
         }
 
-        return self::$choices[$class];
+        return $values;
     }
 
     /**

@@ -29,5 +29,5 @@ function test_exp()
 
 function clear_exp()
 {
-    reset_class('GpsLab\Component\Enum\ExplicitEnum', ['instances', 'values']);
+    reset_class('GpsLab\Component\Enum\ExplicitEnum', ['instances']);
 }
