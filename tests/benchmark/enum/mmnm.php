@@ -10,17 +10,16 @@
 
 require __DIR__.'/../../bootstrap.php';
 
-use GpsLab\Component\Enum\Tests\Fixture\Enum\Rival\AbcMarcMabe;
+use GpsLab\Component\Enum\Tests\Fixture\Enum\Rival\DefMarcMabe;
 
-$a = AbcMarcMabe::byValue(AbcMarcMabe::A);
-$a->is(AbcMarcMabe::byValue(AbcMarcMabe::A));
+$d = DefMarcMabe::byValue(DefMarcMabe::D);
+$d->is(DefMarcMabe::byValue(DefMarcMabe::D));
 
-$b = AbcMarcMabe::byValue(AbcMarcMabe::B);
-$b->is(AbcMarcMabe::byValue(AbcMarcMabe::A));
+$e = DefMarcMabe::byValue(DefMarcMabe::E);
+$e->is(DefMarcMabe::byValue(DefMarcMabe::D));
 
-$c = AbcMarcMabe::byValue(AbcMarcMabe::C);
-$z = (string) $c;
+$f = DefMarcMabe::byValue(DefMarcMabe::F);
+$z = (string) $f;
 
-AbcMarcMabe::choices();
-AbcMarcMabe::values();
-
+DefMarcMabe::choices();
+DefMarcMabe::values();
