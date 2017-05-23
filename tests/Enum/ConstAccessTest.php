@@ -76,8 +76,6 @@ class ConstAccessTest extends \PHPUnit_Framework_TestCase
      */
     public function testByValue($value, $title)
     {
-        $this->assertTrue(ConstAccess::isValid($value));
-
         $channel = ConstAccess::byValue($value);
 
         $this->assertEquals($value, $channel->value());

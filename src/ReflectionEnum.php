@@ -124,18 +124,6 @@ abstract class ReflectionEnum implements Enum, \Serializable
     }
 
     /**
-     * Is value supported.
-     *
-     * @param mixed $value
-     *
-     * @return bool
-     */
-    final public static function isValid($value)
-    {
-        return in_array($value, self::constants(), true);
-    }
-
-    /**
      * Get choices for radio group.
      *
      * <code>

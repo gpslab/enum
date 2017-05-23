@@ -43,7 +43,7 @@ abstract class ExplicitEnum implements Enum, \Serializable
 
         // limitation of count object instances
         if (!isset(self::$instances[$key])) {
-            if (!static::isValid($value)) {
+            if (!array_key_exists($value, static::choices())) {
                 throw OutOfEnumException::invalidValue($value, get_called_class());
             }
 
@@ -84,18 +84,6 @@ abstract class ExplicitEnum implements Enum, \Serializable
     final public function equals(Enum $enum)
     {
         return $this === $enum || ($this->value() === $enum->value() && get_called_class() == get_class($enum));
-    }
-
-    /**
-     * Is value supported.
-     *
-     * @param mixed $value
-     *
-     * @return bool
-     */
-    final public static function isValid($value)
-    {
-        return array_key_exists($value, static::choices());
     }
 
     /**

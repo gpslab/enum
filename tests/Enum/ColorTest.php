@@ -71,8 +71,6 @@ class ColorTest extends \PHPUnit_Framework_TestCase
      */
     public function testByValue($value, $title)
     {
-        $this->assertTrue(ColorBW::isValid($value));
-
         $channel = ColorBW::byValue($value);
 
         $this->assertEquals($value, $channel->value());

@@ -39,15 +39,6 @@ interface Enum
     public function equals(Enum $enum);
 
     /**
-     * Is value supported.
-     *
-     * @param mixed $value
-     *
-     * @return bool
-     */
-    public static function isValid($value);
-
-    /**
      * Get choices for radio group.
      *
      * <code>

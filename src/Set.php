@@ -98,18 +98,6 @@ class Set
     }
 
     /**
-     * Is value supported.
-     *
-     * @param mixed $value
-     *
-     * @return bool
-     */
-    final public static function isValid($value)
-    {
-        return in_array($value, self::bits(), true);
-    }
-
-    /**
      * Check if this Set is the same as other.
      *
      * @param Set $set
@@ -281,7 +269,7 @@ class Set
      */
     private static function validateValue($value)
     {
-        if (!static::isValid($value)) {
+        if (!in_array($value, self::bits(), true)) {
             throw OutOfEnumException::invalidValue($value, get_called_class());
         }
     }

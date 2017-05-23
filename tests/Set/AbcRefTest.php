@@ -95,15 +95,6 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testIsValid()
-    {
-        foreach ($this->choices as $value => $title) {
-            $this->assertTrue(AbcRef::isValid($value));
-        }
-
-        $this->assertFalse(AbcRef::isValid('undefined'));
-    }
-
     public function testEqual()
     {
         foreach ($this->choices as $value => $title) {
