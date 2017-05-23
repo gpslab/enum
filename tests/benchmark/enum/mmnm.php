@@ -8,8 +8,6 @@
  * @license   http://opensource.org/licenses/MIT
  */
 
-//require __DIR__.'/../../bootstrap.php';
-
 use GpsLab\Component\Enum\Tests\Fixture\Enum\Rival\DefMarcMabe;
 
 function test_mmnm()
@@ -21,7 +19,7 @@ function test_mmnm()
     $e->is(DefMarcMabe::byValue(DefMarcMabe::D));
 
     $f = DefMarcMabe::byValue(DefMarcMabe::F);
-    $z = (string)$f;
+    $z = (string) $f;
 
     DefMarcMabe::choices();
     DefMarcMabe::values();

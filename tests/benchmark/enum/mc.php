@@ -8,8 +8,6 @@
  * @license   http://opensource.org/licenses/MIT
  */
 
-//require __DIR__.'/../../bootstrap.php';
-
 use GpsLab\Component\Enum\Tests\Fixture\Enum\Rival\AbcMyClabs;
 
 function test_mc()
@@ -21,7 +19,7 @@ function test_mc()
     $b->equals(AbcMyClabs::A());
 
     $c = AbcMyClabs::C();
-    $z = (string)$c;
+    $z = (string) $c;
 
     AbcMyClabs::choices();
     AbcMyClabs::values();

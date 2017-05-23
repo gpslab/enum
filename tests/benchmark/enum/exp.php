@@ -8,8 +8,6 @@
  * @license   http://opensource.org/licenses/MIT
  */
 
-//require __DIR__.'/../../bootstrap.php';
-
 use GpsLab\Component\Enum\Tests\Fixture\Enum\AbcExp;
 
 function test_exp()
@@ -21,7 +19,7 @@ function test_exp()
     $b->equals(AbcExp::byValue(AbcExp::A));
 
     $c = AbcExp::byValue(AbcExp::C);
-    $e = (string)$c;
+    $e = (string) $c;
 
     AbcExp::choices();
     AbcExp::values();

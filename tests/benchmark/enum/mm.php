@@ -8,8 +8,6 @@
  * @license   http://opensource.org/licenses/MIT
  */
 
-//require __DIR__.'/../../bootstrap.php';
-
 use GpsLab\Component\Enum\Tests\Fixture\Enum\Rival\AbcMarcMabe;
 
 function test_mm()
@@ -21,7 +19,7 @@ function test_mm()
     $b->is(AbcMarcMabe::A());
 
     $c = AbcMarcMabe::C();
-    $z = (string)$c;
+    $z = (string) $c;
 
     AbcMarcMabe::choices();
     AbcMarcMabe::values();

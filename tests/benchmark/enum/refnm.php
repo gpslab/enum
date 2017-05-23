@@ -8,8 +8,6 @@
  * @license   http://opensource.org/licenses/MIT
  */
 
-//require __DIR__.'/../../bootstrap.php';
-
 use GpsLab\Component\Enum\Tests\Fixture\Enum\DefRef;
 
 function test_refnm()
@@ -21,7 +19,7 @@ function test_refnm()
     $e->equals(DefRef::byValue(DefRef::D));
 
     $f = DefRef::byValue(DefRef::F);
-    $z = (string)$f;
+    $z = (string) $f;
 
     DefRef::choices();
     DefRef::values();

@@ -8,8 +8,6 @@
  * @license   http://opensource.org/licenses/MIT
  */
 
-//require __DIR__.'/../../bootstrap.php';
-
 use GpsLab\Component\Enum\Tests\Fixture\Enum\Rival\AbcHappyTypes;
 
 function test_ht()
@@ -21,7 +19,7 @@ function test_ht()
     $b->equals(AbcHappyTypes::A());
 
     $c = AbcHappyTypes::C();
-    $z = (string)$c;
+    $z = (string) $c;
 
     AbcHappyTypes::choices();
     AbcHappyTypes::values();

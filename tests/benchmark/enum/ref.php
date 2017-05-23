@@ -8,8 +8,6 @@
  * @license   http://opensource.org/licenses/MIT
  */
 
-//require __DIR__.'/../../bootstrap.php';
-
 use GpsLab\Component\Enum\Tests\Fixture\Enum\AbcRef;
 
 function test_ref()
@@ -21,7 +19,7 @@ function test_ref()
     $b->isA();
 
     $c = AbcRef::c();
-    $z = (string)$c;
+    $z = (string) $c;
 
     AbcRef::choices();
     AbcRef::values();
