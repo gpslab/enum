@@ -19,7 +19,7 @@ $N = $input->getFirstArgument();
 
 $tests = [
     'ref' => 'Reflection enum',
-    'nmag' => 'Reflection enum (no magic)',
+    'refnm' => 'Reflection enum (no magic)',
     'exp' => 'Explicit enum',
     'mc' => 'myclabs/php-enum',
     'mm' => 'marc-mabe/php-enum',
@@ -27,10 +27,18 @@ $tests = [
     'ht' => 'happy-types/enumerable-type',
 ];
 
+// get title max length
+$length = 0;
 foreach ($tests as $test => $title) {
-    $sw->start($test, $title);
+    $length = max($length, strlen($title));
+    include __DIR__.'/enum/'.$test.'.php';
+}
+
+
+foreach ($tests as $test => $title) {
+    $sw->start($test, str_pad($title, $length));
     for ($iteration = 0; $iteration < $N; ++$iteration) {
-        require __DIR__.sprintf('/enum/%s.php', $test);
+        call_user_func('test_'.$test);
     }
     echo $sw->stop($test).PHP_EOL;
 }

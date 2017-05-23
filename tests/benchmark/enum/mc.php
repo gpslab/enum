@@ -8,18 +8,21 @@
  * @license   http://opensource.org/licenses/MIT
  */
 
-require __DIR__.'/../../bootstrap.php';
+//require __DIR__.'/../../bootstrap.php';
 
 use GpsLab\Component\Enum\Tests\Fixture\Enum\Rival\AbcMyClabs;
 
-$a = AbcMyClabs::A();
-$a->equals(AbcMyClabs::A());
+function test_mc()
+{
+    $a = AbcMyClabs::A();
+    $a->equals(AbcMyClabs::A());
 
-$b = AbcMyClabs::B();
-$b->equals(AbcMyClabs::A());
+    $b = AbcMyClabs::B();
+    $b->equals(AbcMyClabs::A());
 
-$c = AbcMyClabs::C();
-$z = (string) $c;
+    $c = AbcMyClabs::C();
+    $z = (string)$c;
 
-AbcMyClabs::choices();
-AbcMyClabs::values();
+    AbcMyClabs::choices();
+    AbcMyClabs::values();
+}

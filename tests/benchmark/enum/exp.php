@@ -8,18 +8,21 @@
  * @license   http://opensource.org/licenses/MIT
  */
 
-require __DIR__.'/../../bootstrap.php';
+//require __DIR__.'/../../bootstrap.php';
 
 use GpsLab\Component\Enum\Tests\Fixture\Enum\AbcExp;
 
-$a = AbcExp::byValue(AbcExp::A);
-$a->equals(AbcExp::byValue(AbcExp::A));
+function test_exp()
+{
+    $a = AbcExp::byValue(AbcExp::A);
+    $a->equals(AbcExp::byValue(AbcExp::A));
 
-$b = AbcExp::byValue(AbcExp::B);
-$b->equals(AbcExp::byValue(AbcExp::A));
+    $b = AbcExp::byValue(AbcExp::B);
+    $b->equals(AbcExp::byValue(AbcExp::A));
 
-$c = AbcExp::byValue(AbcExp::C);
-$e = (string) $c;
+    $c = AbcExp::byValue(AbcExp::C);
+    $e = (string)$c;
 
-AbcExp::choices();
-AbcExp::values();
+    AbcExp::choices();
+    AbcExp::values();
+}
