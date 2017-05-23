@@ -10,7 +10,6 @@
  */
 require __DIR__.'/../bootstrap.php';
 
-use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -46,32 +45,27 @@ $output->progressStart(count($tests));
 
 foreach ($tests as $test => $title) {
     include __DIR__.'/enum/'.$test.'.php';
-    $sw = new Stopwatch();
 
-    $sw->start($test, $title);
+    $sum_memory = 0;
+    $sum_duration = 0;
     for ($i = 0; $i < $N; ++$i) {
-        call_user_func('test_'.$test);
+        $memory = memory_get_usage();
+        $duration = microtime(true);
+        call_user_func('test_'.$test); // run test
+        $sum_duration += microtime(true) - $duration;
+        $sum_memory += memory_get_usage() - $memory;
 
         // clear cached data
-        $sw->stop($test);
         call_user_func('clear_'.$test);
-        $sw->start($test);
     }
-    $event = $sw->stop($test);
 
-    // Stopwatch incorrect calculate memory usage
-    $memory = memory_get_usage();
-    call_user_func('test_'.$test);
-    $memory = memory_get_usage() - $memory;
-
-    // save result
     $results[] = [
-        $event->getCategory(),
-        sprintf('%.2F KiB', $memory / 1024),
-        sprintf('%d ms', $event->getDuration()),
+        $title,
+        sprintf('%.2F KiB', $sum_memory / $N / 1024),
+        sprintf('%d ms', round($sum_duration * 1000)),
     ];
     $output->progressAdvance();
 }
 
 $output->progressFinish();
-$output->table(['Test', 'Memory', 'Duration'], $results);
+$output->table(['Test', 'Memory Avg', 'Duration All'], $results);
