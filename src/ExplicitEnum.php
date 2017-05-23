@@ -25,6 +25,11 @@ abstract class ExplicitEnum implements Enum, \Serializable
     private static $instances = [];
 
     /**
+     * @var Enum[]
+     */
+    private static $values = [];
+
+    /**
      * @param mixed $value
      */
     final private function __construct($value)
@@ -68,12 +73,16 @@ abstract class ExplicitEnum implements Enum, \Serializable
      */
     final public static function values()
     {
-        $values = [];
-        foreach (static::choices() as $value => $label) {
-            $values[$label] = self::byValue($value);
+        $class = get_called_class();
+
+        if (!isset(self::$values[$class])) {
+            self::$values[$class] = [];
+            foreach (static::choices() as $value => $label) {
+                self::$values[$class][$label] = self::byValue($value);
+            }
         }
 
-        return $values;
+        return self::$values[$class];
     }
 
     /**
