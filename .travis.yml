@@ -45,7 +45,8 @@ before_script:
 script:
     - if [ "$COVERAGE" != "1" ] && [ "$BENCHMARK" != "1" ]; then vendor/bin/phpunit --verbose; fi;
     - if [ "$COVERAGE" == "1" ] && [ "$BENCHMARK" != "1" ]; then vendor/bin/phpunit --verbose --coverage-clover build/coverage-clover.xml; fi;
-    - if [ "$BENCHMARK" == "1" ]; then php tests/benchmark/enum_rival.php 100000; fi;
+    - if [ "$BENCHMARK" == "1" ]; then php tests/benchmark/set.php 100000; fi;
+    - if [ "$BENCHMARK" == "1" ]; then php tests/benchmark/enum.php 100000; fi;
 
 after_script:
     - if [ "$COVERAGE" == "1" ] && [ "$BENCHMARK" != "1" ]; then vendor/bin/ocular code-coverage:upload --format=php-clover build/coverage-clover.xml; fi;
