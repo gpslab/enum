@@ -32,7 +32,7 @@ before_install:
     - composer self-update
 
 before_script:
-    - composer install --prefer-dist --no-interaction --no-scripts --no-progress
+    - composer install --prefer-dist --no-interaction --no-scripts --no-progress -vvv
 
 script:
     - if [ "$COVERAGE" != "1" ]; then vendor/bin/phpunit --verbose; fi;
