@@ -12,10 +12,22 @@ require __DIR__.'/../bootstrap.php';
 
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
-$sw = new Stopwatch();
 $input = new ArgvInput();
+$output = new SymfonyStyle($input, new ConsoleOutput());
 $N = $input->getFirstArgument();
+
+function reset_class($class, $properties)
+{
+    $ref = new ReflectionClass($class);
+    foreach ($properties as $property_name) {
+        $property = $ref->getProperty($property_name);
+        $property->setAccessible(true);
+        $property->setValue([]);
+    }
+}
 
 $tests = [
     'ref' => 'Reflection enum',
@@ -27,18 +39,39 @@ $tests = [
     'ht' => 'happy-types/enumerable-type',
 ];
 
-// get title max length
-$length = 0;
+$results = [];
+
+$output->section('Enum benchmark');
+$output->progressStart(count($tests));
+
 foreach ($tests as $test => $title) {
-    $length = max($length, strlen($title));
     include __DIR__.'/enum/'.$test.'.php';
-}
+    $sw = new Stopwatch();
 
-
-foreach ($tests as $test => $title) {
-    $sw->start($test, str_pad($title, $length));
-    for ($iteration = 0; $iteration < $N; ++$iteration) {
+    $sw->start($test, $title);
+    for ($i = 0; $i < $N; ++$i) {
         call_user_func('test_'.$test);
+
+        // clear cached data
+        $sw->stop($test);
+        call_user_func('clear_'.$test);
+        $sw->start($test);
     }
-    echo $sw->stop($test).PHP_EOL;
+    $event = $sw->stop($test);
+
+    // Stopwatch incorrect calculate memory usage
+    $memory = memory_get_usage();
+    call_user_func('test_'.$test);
+    $memory = memory_get_usage() - $memory;
+
+    // save result
+    $results[] = [
+        $event->getCategory(),
+        sprintf('%.2F KiB', $memory / 1024),
+        sprintf('%d ms', $event->getDuration()),
+    ];
+    $output->progressAdvance();
 }
+
+$output->progressFinish();
+$output->table(['Test', 'Memory', 'Duration'], $results);

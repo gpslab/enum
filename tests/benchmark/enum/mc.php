@@ -26,3 +26,9 @@ function test_mc()
     AbcMyClabs::choices();
     AbcMyClabs::values();
 }
+
+function clear_mc()
+{
+    reset_class('GpsLab\Component\Enum\Tests\Fixture\Enum\Rival\AbcMyClabs', ['choices']);
+    reset_class('MyCLabs\Enum\Enum', ['cache']);
+}

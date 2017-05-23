@@ -26,3 +26,9 @@ function test_ht()
     AbcHappyTypes::choices();
     AbcHappyTypes::values();
 }
+
+function clear_ht()
+{
+    reset_class('GpsLab\Component\Enum\Tests\Fixture\Enum\Rival\AbcHappyTypes', ['choices']);
+    reset_class('HappyTypes\EnumerableType', ['instances', 'enumCache']);
+}

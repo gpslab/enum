@@ -26,3 +26,9 @@ function test_mmnm()
     DefMarcMabe::choices();
     DefMarcMabe::values();
 }
+
+function clear_mmnm()
+{
+    reset_class('GpsLab\Component\Enum\Tests\Fixture\Enum\Rival\DefMarcMabe', ['choices']);
+    reset_class('MabeEnum\Enum', ['constants', 'instances']);
+}

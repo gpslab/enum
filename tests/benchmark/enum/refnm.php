@@ -26,3 +26,15 @@ function test_refnm()
     DefRef::choices();
     DefRef::values();
 }
+
+function clear_refnm()
+{
+    reset_class('GpsLab\Component\Enum\ReflectionEnum', [
+        'instances',
+        'create_methods',
+        'is_methods',
+        'constants',
+        'choices',
+        'values',
+    ]);
+}

@@ -26,3 +26,8 @@ function test_exp()
     AbcExp::choices();
     AbcExp::values();
 }
+
+function clear_exp()
+{
+    reset_class('GpsLab\Component\Enum\ExplicitEnum', ['instances', 'values']);
+}

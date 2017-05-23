@@ -26,3 +26,15 @@ function test_ref()
     AbcRef::choices();
     AbcRef::values();
 }
+
+function clear_ref()
+{
+    reset_class('GpsLab\Component\Enum\ReflectionEnum', [
+        'instances',
+        'create_methods',
+        'is_methods',
+        'constants',
+        'choices',
+        'values',
+    ]);
+}

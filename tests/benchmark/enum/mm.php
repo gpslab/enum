@@ -26,3 +26,9 @@ function test_mm()
     AbcMarcMabe::choices();
     AbcMarcMabe::values();
 }
+
+function clear_mm()
+{
+    reset_class('GpsLab\Component\Enum\Tests\Fixture\Enum\Rival\AbcMarcMabe', ['choices']);
+    reset_class('MabeEnum\Enum', ['constants', 'instances']);
+}
