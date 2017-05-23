@@ -18,8 +18,18 @@ class OutOfEnumException extends \OutOfRangeException
      *
      * @return self
      */
-    public static function create($value, $type)
+    public static function invalidValue($value, $type)
     {
         return new self(sprintf('Value "%s" is not supported for "%s".', $value, $type));
+    }
+
+    /**
+     * @param string $constant
+     *
+     * @return self
+     */
+    public static function undefinedConstant($constant)
+    {
+        return new self(sprintf('Constant "%s" is not defined.', $constant));
     }
 }

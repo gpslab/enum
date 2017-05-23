@@ -15,6 +15,7 @@ use GpsLab\Component\Enum\ReflectionEnum;
  * @method static ColorRGB GREEN()
  * @method static ColorRGB BLUE()
  * @method static ColorRGB byValue($value)
+ * @method static ColorRGB byName($name)
  */
 class ColorRGB extends ReflectionEnum
 {

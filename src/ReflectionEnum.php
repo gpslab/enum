@@ -10,7 +10,6 @@
 
 namespace GpsLab\Component\Enum;
 
-use GpsLab\Component\Enum\Exception\BadMethodCallException;
 use GpsLab\Component\Enum\Exception\OutOfEnumException;
 
 abstract class ReflectionEnum implements Enum, \Serializable
@@ -51,7 +50,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
         $constant = array_search($value, self::$constants[$class], true);
 
         if ($constant === false) {
-            throw OutOfEnumException::create($value, $class);
+            throw OutOfEnumException::invalidValue($value, $class);
         }
 
         // limitation of count object instances
@@ -60,6 +59,27 @@ abstract class ReflectionEnum implements Enum, \Serializable
         }
 
         return self::$instances[$class][$constant];
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return Enum
+     */
+    final public static function byName($name)
+    {
+        $class = get_called_class();
+        if (isset(self::$instances[$class][$name])) {
+            return self::$instances[$class][$name];
+        }
+
+        self::constants();
+
+        if (!isset(self::$constants[$class][$name])) {
+            throw OutOfEnumException::undefinedConstant($class . '::' . $name);
+        }
+
+        return self::$instances[$class][$name] = new static(self::$constants[$class][$name]);
     }
 
     /**
@@ -83,6 +103,14 @@ abstract class ReflectionEnum implements Enum, \Serializable
         }
 
         return $values;
+    }
+
+    /**
+     * @return string
+     */
+    final public function name()
+    {
+        return array_search($this->value(), self::constants());
     }
 
     /**
@@ -136,7 +164,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     public function __toString()
     {
-        return $this->constant();
+        return $this->name();
     }
 
     final public function __clone()
@@ -174,14 +202,6 @@ abstract class ReflectionEnum implements Enum, \Serializable
     }
 
     /**
-     * @return string
-     */
-    private function constant()
-    {
-        return array_search($this->value(), self::constants());
-    }
-
-    /**
      * @param string $method
      * @param array  $arguments
      *
@@ -189,17 +209,6 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     public static function __callStatic($method, array $arguments = [])
     {
-        $class = get_called_class();
-        if (isset(self::$instances[$class][$method])) {
-            return self::$instances[$class][$method];
-        }
-
-        self::constants();
-
-        if (!isset(self::$constants[$class][$method])) {
-            throw BadMethodCallException::noStaticMethod($method, $class);
-        }
-
-        return self::$instances[$class][$method] = new static(self::$constants[$class][$method]);
+        return self::byName($method);
     }
 }

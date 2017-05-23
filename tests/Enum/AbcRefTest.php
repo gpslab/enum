@@ -21,6 +21,15 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
         AbcRef::C => 'acme.demo.abc.c',
     ];
 
+    /**
+     * @var array
+     */
+    private $names = [
+        AbcRef::A => 'A',
+        AbcRef::B => 'B',
+        AbcRef::C => 'C',
+    ];
+
     public function testChoices()
     {
         $this->assertEquals($this->choices, AbcRef::choices());
@@ -58,13 +67,46 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
      */
     public function testByValue($value, $title)
     {
-        $this->assertTrue(AbcRef::isValid($value));
-
         $channel = AbcRef::byValue($value);
 
         $this->assertEquals($value, $channel->value());
         $this->assertEquals($title, (string) $channel);
         $this->assertTrue($channel->equals(AbcRef::byValue($value)));
+    }
+
+    /**
+     * @return array
+     */
+    public function getNamesData()
+    {
+        $data = [];
+        foreach ($this->names as $value => $name) {
+            $data[] = [$value, $name];
+        }
+
+        return $data;
+    }
+
+    /**
+     * @dataProvider getNamesData
+     *
+     * @param string $value
+     * @param string $name
+     */
+    public function testByName($value, $name)
+    {
+        $this->assertEquals($value, AbcRef::byName($name)->value());
+    }
+
+    /**
+     * @dataProvider getNamesData
+     *
+     * @param string $value
+     * @param string $name
+     */
+    public function testName($value, $name)
+    {
+        $this->assertEquals($name, AbcRef::byValue($value)->name());
     }
 
     /**
@@ -127,14 +169,22 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \GpsLab\Component\Enum\Exception\BadMethodCallException
+     * @expectedException \GpsLab\Component\Enum\Exception\OutOfEnumException
+     */
+    public function testNameNotSupported()
+    {
+        AbcRef::byName('foo');
+    }
+
+    /**
+     * @expectedException \GpsLab\Component\Enum\Exception\OutOfEnumException
      */
     public function testUndefinedNamedConstruct()
     {
         AbcRef::undefined();
     }
 
-    public function testIsA()
+    public function testEqualsA()
     {
         $this->assertEquals(AbcRef::A, AbcRef::A()->value());
         $this->assertEquals(AbcRef::A(), AbcRef::A());
@@ -142,7 +192,7 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(AbcRef::A()->equals(AbcRef::B()));
     }
 
-    public function testIsB()
+    public function testEqualsB()
     {
         $this->assertEquals(AbcRef::B, AbcRef::B()->value());
         $this->assertEquals(AbcRef::B(), AbcRef::B());
@@ -150,7 +200,7 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(AbcRef::B()->equals(AbcRef::A()));
     }
 
-    public function testIsC()
+    public function testEqualsC()
     {
         $this->assertEquals(AbcRef::C, AbcRef::C()->value());
         $this->assertEquals(AbcRef::C(), AbcRef::C());

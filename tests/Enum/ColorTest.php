@@ -23,6 +23,17 @@ class ColorTest extends \PHPUnit_Framework_TestCase
         ColorBW::WHITE => 'acme.demo.color.white',
     ];
 
+    /**
+     * @var array
+     */
+    private $names = [
+        ColorBW::RED => 'RED',
+        ColorBW::GREEN => 'GREEN',
+        ColorBW::BLUE => 'BLUE',
+        ColorBW::BLACK => 'BLACK',
+        ColorBW::WHITE => 'WHITE',
+    ];
+
     public function testChoices()
     {
         $this->assertEquals($this->choices, ColorBW::choices());
@@ -67,6 +78,41 @@ class ColorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($value, $channel->value());
         $this->assertEquals($title, (string) $channel);
         $this->assertTrue($channel->equals(ColorBW::byValue($value)));
+    }
+
+    /**
+     * @return array
+     */
+    public function getNamesData()
+    {
+        $data = [];
+        foreach ($this->names as $value => $name) {
+            $data[] = [$value, $name];
+        }
+
+        return $data;
+    }
+
+    /**
+     * @dataProvider getNamesData
+     *
+     * @param string $value
+     * @param string $name
+     */
+    public function testByName($value, $name)
+    {
+        $this->assertEquals($value, ColorBW::byName($name)->value());
+    }
+
+    /**
+     * @dataProvider getNamesData
+     *
+     * @param string $value
+     * @param string $name
+     */
+    public function testName($value, $name)
+    {
+        $this->assertEquals($name, ColorBW::byValue($value)->name());
     }
 
     /**
@@ -129,7 +175,15 @@ class ColorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \GpsLab\Component\Enum\Exception\BadMethodCallException
+     * @expectedException \GpsLab\Component\Enum\Exception\OutOfEnumException
+     */
+    public function testNameNotSupported()
+    {
+        ColorBW::byName('foo');
+    }
+
+    /**
+     * @expectedException \GpsLab\Component\Enum\Exception\OutOfEnumException
      */
     public function testUndefinedNamedConstruct()
     {

@@ -17,6 +17,7 @@ use GpsLab\Component\Enum\ReflectionEnum;
  * @method static AbcRef B()
  * @method static AbcRef C()
  * @method static AbcRef byValue($value)
+ * @method static AbcRef byName($name)
  */
 class AbcRef extends ReflectionEnum
 {

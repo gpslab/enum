@@ -44,7 +44,7 @@ abstract class ExplicitEnum implements Enum, \Serializable
         // limitation of count object instances
         if (!isset(self::$instances[$key])) {
             if (!static::isValid($value)) {
-                throw OutOfEnumException::create($value, get_called_class());
+                throw OutOfEnumException::invalidValue($value, get_called_class());
             }
 
             self::$instances[$key] = new static($value);

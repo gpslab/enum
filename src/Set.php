@@ -282,7 +282,7 @@ class Set
     private static function validateValue($value)
     {
         if (!static::isValid($value)) {
-            throw OutOfEnumException::create($value, get_called_class());
+            throw OutOfEnumException::invalidValue($value, get_called_class());
         }
     }
 

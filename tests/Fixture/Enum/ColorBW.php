@@ -15,6 +15,7 @@ namespace GpsLab\Component\Enum\Tests\Fixture\Enum;
  * @method static ColorBW GREEN()
  * @method static ColorBW BLUE()
  * @method static ColorBW byValue($value)
+ * @method static ColorBW byName($name)
  */
 class ColorBW extends ColorRGB
 {

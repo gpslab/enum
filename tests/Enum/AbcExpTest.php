@@ -58,8 +58,6 @@ class AbcExpTest extends \PHPUnit_Framework_TestCase
      */
     public function testByValue($value, $title)
     {
-        $this->assertTrue(AbcExp::isValid($value));
-
         $channel = AbcExp::byValue($value);
 
         $this->assertEquals($value, $channel->value());

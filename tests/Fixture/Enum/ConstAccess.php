@@ -14,6 +14,7 @@ use GpsLab\Component\Enum\ReflectionEnum;
  * @method static ConstAccess ACTION_GET()
  * @method static ConstAccess ACTION_POST()
  * @method static ConstAccess byValue($value)
+ * @method static ConstAccess byName($name)
  */
 class ConstAccess extends ReflectionEnum
 {

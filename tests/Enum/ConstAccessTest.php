@@ -17,6 +17,11 @@ class ConstAccessTest extends \PHPUnit_Framework_TestCase
      */
     private $choices = [];
 
+    /**
+     * @var array
+     */
+    private $names = [];
+
     public function setUp()
     {
         if (PHP_VERSION_ID < 70100) {
@@ -26,6 +31,10 @@ class ConstAccessTest extends \PHPUnit_Framework_TestCase
         $this->choices = [
             ConstAccess::ACTION_GET => 'acme.demo.const_access.action_get',
             ConstAccess::ACTION_POST => 'acme.demo.const_access.action_post',
+        ];
+        $this->names = [
+            ConstAccess::ACTION_GET => 'ACTION_GET',
+            ConstAccess::ACTION_POST => 'ACTION_POST',
         ];
     }
 
@@ -74,6 +83,41 @@ class ConstAccessTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($value, $channel->value());
         $this->assertEquals($title, (string) $channel);
         $this->assertTrue($channel->equals(ConstAccess::byValue($value)));
+    }
+
+    /**
+     * @return array
+     */
+    public function getNamesData()
+    {
+        $data = [];
+        foreach ($this->names as $value => $name) {
+            $data[] = [$value, $name];
+        }
+
+        return $data;
+    }
+
+    /**
+     * @dataProvider getNamesData
+     *
+     * @param string $value
+     * @param string $name
+     */
+    public function testByName($value, $name)
+    {
+        $this->assertEquals($value, ConstAccess::byName($name)->value());
+    }
+
+    /**
+     * @dataProvider getNamesData
+     *
+     * @param string $value
+     * @param string $name
+     */
+    public function testName($value, $name)
+    {
+        $this->assertEquals($name, ConstAccess::byValue($value)->name());
     }
 
     /**
@@ -137,7 +181,15 @@ class ConstAccessTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \GpsLab\Component\Enum\Exception\BadMethodCallException
+     * @expectedException \GpsLab\Component\Enum\Exception\OutOfEnumException
+     */
+    public function testNameNotSupported()
+    {
+        ConstAccess::byName('foo');
+    }
+
+    /**
+     * @expectedException \GpsLab\Component\Enum\Exception\OutOfEnumException
      */
     public function testUndefinedNamedConstruct()
     {
