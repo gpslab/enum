@@ -26,17 +26,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
     private static $instances = [];
 
     /**
-     * @var mixed[][]
-     */
-    private static $create_methods = [];
-
-    /**
-     * @var mixed[][]
-     */
-    private static $is_methods = [];
-
-    /**
-     * @var mixed[][]
+     * @var array
      */
     private static $constants = [];
 
@@ -56,20 +46,20 @@ abstract class ReflectionEnum implements Enum, \Serializable
     final public static function byValue($value)
     {
         $class = get_called_class();
-        self::detectConstants($class);
+        self::constants();
 
-        $method = array_search($value, self::$create_methods[$class], true);
+        $constant = array_search($value, self::$constants[$class], true);
 
-        if ($method === false) {
+        if ($constant === false) {
             throw OutOfEnumException::create($value, $class);
         }
 
         // limitation of count object instances
-        if (!isset(self::$instances[$class][$method])) {
-            self::$instances[$class][$method] = new static($value);
+        if (!isset(self::$instances[$class][$constant])) {
+            self::$instances[$class][$constant] = new static($value);
         }
 
-        return self::$instances[$class][$method];
+        return self::$instances[$class][$constant];
     }
 
     /**
@@ -171,34 +161,14 @@ abstract class ReflectionEnum implements Enum, \Serializable
     }
 
     /**
-     * @param string $class
-     */
-    private static function detectConstants($class)
-    {
-        if (!isset(self::$create_methods[$class])) {
-            self::$create_methods[$class] = [];
-            self::$is_methods[$class] = [];
-            self::$constants[$class] = [];
-
-            foreach (ConstantDetector::detect($class) as $constant => $constant_value) {
-                self::$constants[$class][$constant] = $constant_value;
-
-                // second parameter of ucwords() is not supported on HHVM
-                $constant = str_replace(' ', '', ucwords(str_replace('_', ' ', strtolower($constant))));
-
-                self::$is_methods[$class]['is'.$constant] = $constant_value;
-                self::$create_methods[$class][lcfirst($constant)] = $constant_value;
-            }
-        }
-    }
-
-    /**
      * @return array
      */
     private static function constants()
     {
         $class = get_called_class();
-        self::detectConstants($class);
+        if (!isset(self::$constants[$class])) {
+            self::$constants[$class] = ConstantDetector::detect($class);
+        }
 
         return self::$constants[$class];
     }
@@ -215,24 +185,6 @@ abstract class ReflectionEnum implements Enum, \Serializable
      * @param string $method
      * @param array  $arguments
      *
-     * @return bool
-     */
-    public function __call($method, array $arguments = [])
-    {
-        $class = get_called_class();
-        self::detectConstants($class);
-
-        if (!isset(self::$is_methods[$class][$method])) {
-            throw BadMethodCallException::noMethod($method, $class);
-        }
-
-        return $this->value === self::$is_methods[$class][$method];
-    }
-
-    /**
-     * @param string $method
-     * @param array  $arguments
-     *
      * @return Enum
      */
     public static function __callStatic($method, array $arguments = [])
@@ -242,12 +194,12 @@ abstract class ReflectionEnum implements Enum, \Serializable
             return self::$instances[$class][$method];
         }
 
-        self::detectConstants($class);
+        self::constants();
 
-        if (!isset(self::$create_methods[$class][$method])) {
+        if (!isset(self::$constants[$class][$method])) {
             throw BadMethodCallException::noStaticMethod($method, $class);
         }
 
-        return self::$instances[$class][$method] = new static(self::$create_methods[$class][$method]);
+        return self::$instances[$class][$method] = new static(self::$constants[$class][$method]);
     }
 }

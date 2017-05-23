@@ -11,10 +11,8 @@ namespace GpsLab\Component\Enum\Tests\Fixture\Enum;
 use GpsLab\Component\Enum\ReflectionEnum;
 
 /**
- * @method static ConstAccess actionGet()
- * @method static ConstAccess actionPost()
- * @method bool isActionGet()
- * @method bool isActionPost()
+ * @method static ConstAccess ACTION_GET()
+ * @method static ConstAccess ACTION_POST()
  * @method static ConstAccess byValue($value)
  */
 class ConstAccess extends ReflectionEnum

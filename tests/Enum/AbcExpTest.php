@@ -129,6 +129,7 @@ class AbcExpTest extends \PHPUnit_Framework_TestCase
     public function testIsA()
     {
         $this->assertEquals(AbcExp::A, AbcExp::byValue(AbcExp::A)->value());
+        $this->assertEquals(AbcExp::byValue(AbcExp::A), AbcExp::byValue(AbcExp::A));
         $this->assertTrue(AbcExp::byValue(AbcExp::A)->equals(AbcExp::byValue(AbcExp::A)));
         $this->assertFalse(AbcExp::byValue(AbcExp::A)->equals(AbcExp::byValue(AbcExp::B)));
     }
@@ -136,6 +137,7 @@ class AbcExpTest extends \PHPUnit_Framework_TestCase
     public function testIsB()
     {
         $this->assertEquals(AbcExp::B, AbcExp::byValue(AbcExp::B)->value());
+        $this->assertEquals(AbcExp::byValue(AbcExp::B), AbcExp::byValue(AbcExp::B));
         $this->assertTrue(AbcExp::byValue(AbcExp::B)->equals(AbcExp::byValue(AbcExp::B)));
         $this->assertFalse(AbcExp::byValue(AbcExp::B)->equals(AbcExp::byValue(AbcExp::A)));
     }
@@ -143,6 +145,7 @@ class AbcExpTest extends \PHPUnit_Framework_TestCase
     public function testIsC()
     {
         $this->assertEquals(AbcExp::C, AbcExp::byValue(AbcExp::C)->value());
+        $this->assertEquals(AbcExp::byValue(AbcExp::C), AbcExp::byValue(AbcExp::C));
         $this->assertTrue(AbcExp::byValue(AbcExp::C)->equals(AbcExp::byValue(AbcExp::C)));
         $this->assertFalse(AbcExp::byValue(AbcExp::C)->equals(AbcExp::byValue(AbcExp::A)));
     }

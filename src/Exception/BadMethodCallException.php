@@ -22,15 +22,4 @@ class BadMethodCallException extends \BadMethodCallException
     {
         return new self(sprintf('No static method "%s" in class "%s".', $method, $class));
     }
-
-    /**
-     * @param string $method
-     * @param string $class
-     *
-     * @return self
-     */
-    public static function noMethod($method, $class)
-    {
-        return new self(sprintf('No method "%s" in class "%s".', $method, $class));
-    }
 }

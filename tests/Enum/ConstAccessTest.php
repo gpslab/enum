@@ -124,7 +124,7 @@ class ConstAccessTest extends \PHPUnit_Framework_TestCase
      */
     public function testClone()
     {
-        $action = ConstAccess::actionGet();
+        $action = ConstAccess::ACTION_GET();
         $action = clone $action;
     }
 
@@ -144,26 +144,20 @@ class ConstAccessTest extends \PHPUnit_Framework_TestCase
         ConstAccess::undefined();
     }
 
-    /**
-     * @expectedException \GpsLab\Component\Enum\Exception\BadMethodCallException
-     */
-    public function testUndefinedMethod()
-    {
-        ConstAccess::actionGet()->undefined();
-    }
-
     public function testIsActionGet()
     {
-        $this->assertEquals(ConstAccess::ACTION_GET, ConstAccess::actionGet()->value());
-        $this->assertTrue(ConstAccess::actionGet()->isActionGet());
-        $this->assertFalse(ConstAccess::actionGet()->isActionPost());
+        $this->assertEquals(ConstAccess::ACTION_GET, ConstAccess::ACTION_GET()->value());
+        $this->assertEquals(ConstAccess::ACTION_GET(), ConstAccess::ACTION_GET());
+        $this->assertTrue(ConstAccess::ACTION_GET()->equals(ConstAccess::ACTION_GET()));
+        $this->assertFalse(ConstAccess::ACTION_GET()->equals(ConstAccess::ACTION_POST()));
     }
 
     public function testIsActionPost()
     {
-        $this->assertEquals(ConstAccess::ACTION_POST, ConstAccess::actionPost()->value());
-        $this->assertTrue(ConstAccess::actionPost()->isActionPost());
-        $this->assertFalse(ConstAccess::actionPost()->isActionGet());
+        $this->assertEquals(ConstAccess::ACTION_POST, ConstAccess::ACTION_POST()->value());
+        $this->assertEquals(ConstAccess::ACTION_POST(), ConstAccess::ACTION_POST());
+        $this->assertTrue(ConstAccess::ACTION_POST()->equals(ConstAccess::ACTION_POST()));
+        $this->assertFalse(ConstAccess::ACTION_POST()->equals(ConstAccess::ACTION_GET()));
     }
 
     public function testCreateStatic()
@@ -174,6 +168,6 @@ class ConstAccessTest extends \PHPUnit_Framework_TestCase
         $property->setAccessible(true);
         $property->setValue([]);
 
-        ConstAccess::actionGet();
+        ConstAccess::ACTION_GET();
     }
 }

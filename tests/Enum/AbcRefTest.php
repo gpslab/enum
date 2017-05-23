@@ -114,7 +114,7 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
      */
     public function testClone()
     {
-        $abc = AbcRef::a();
+        $abc = AbcRef::A();
         $abc = clone $abc;
     }
 
@@ -134,33 +134,28 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
         AbcRef::undefined();
     }
 
-    /**
-     * @expectedException \GpsLab\Component\Enum\Exception\BadMethodCallException
-     */
-    public function testUndefinedMethod()
-    {
-        AbcRef::a()->undefined();
-    }
-
     public function testIsA()
     {
-        $this->assertEquals(AbcRef::A, AbcRef::a()->value());
-        $this->assertTrue(AbcRef::a()->isA());
-        $this->assertFalse(AbcRef::a()->isB());
+        $this->assertEquals(AbcRef::A, AbcRef::A()->value());
+        $this->assertEquals(AbcRef::A(), AbcRef::A());
+        $this->assertTrue(AbcRef::A()->equals(AbcRef::A()));
+        $this->assertFalse(AbcRef::A()->equals(AbcRef::B()));
     }
 
     public function testIsB()
     {
-        $this->assertEquals(AbcRef::B, AbcRef::b()->value());
-        $this->assertTrue(AbcRef::b()->isB());
-        $this->assertFalse(AbcRef::b()->isA());
+        $this->assertEquals(AbcRef::B, AbcRef::B()->value());
+        $this->assertEquals(AbcRef::B(), AbcRef::B());
+        $this->assertTrue(AbcRef::B()->equals(AbcRef::B()));
+        $this->assertFalse(AbcRef::B()->equals(AbcRef::A()));
     }
 
     public function testIsC()
     {
-        $this->assertEquals(AbcRef::C, AbcRef::c()->value());
-        $this->assertTrue(AbcRef::c()->isC());
-        $this->assertFalse(AbcRef::c()->isA());
+        $this->assertEquals(AbcRef::C, AbcRef::C()->value());
+        $this->assertEquals(AbcRef::C(), AbcRef::C());
+        $this->assertTrue(AbcRef::C()->equals(AbcRef::C()));
+        $this->assertFalse(AbcRef::C()->equals(AbcRef::A()));
     }
 
     public function testCreateStatic()
@@ -171,6 +166,6 @@ class AbcRefTest extends \PHPUnit_Framework_TestCase
         $property->setAccessible(true);
         $property->setValue([]);
 
-        AbcRef::a();
+        AbcRef::A();
     }
 }

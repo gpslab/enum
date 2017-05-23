@@ -116,7 +116,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
      */
     public function testClone()
     {
-        $color = ColorBW::red();
+        $color = ColorBW::RED();
         $color = clone $color;
     }
 
@@ -136,47 +136,44 @@ class ColorTest extends \PHPUnit_Framework_TestCase
         ColorBW::undefined();
     }
 
-    /**
-     * @expectedException \GpsLab\Component\Enum\Exception\BadMethodCallException
-     */
-    public function testUndefinedMethod()
-    {
-        ColorBW::red()->undefined();
-    }
-
     public function testIsRed()
     {
-        $this->assertEquals(ColorBW::RED, ColorBW::red()->value());
-        $this->assertTrue(ColorBW::red()->isRed());
-        $this->assertFalse(ColorBW::red()->isGreen());
+        $this->assertEquals(ColorBW::RED, ColorBW::RED()->value());
+        $this->assertEquals(ColorBW::RED(), ColorBW::RED());
+        $this->assertTrue(ColorBW::RED()->equals(ColorBW::RED()));
+        $this->assertFalse(ColorBW::RED()->equals(ColorBW::GREEN()));
     }
 
     public function testIsGreen()
     {
-        $this->assertEquals(ColorBW::GREEN, ColorBW::green()->value());
-        $this->assertTrue(ColorBW::green()->isGreen());
-        $this->assertFalse(ColorBW::green()->isRed());
+        $this->assertEquals(ColorBW::GREEN, ColorBW::GREEN()->value());
+        $this->assertEquals(ColorBW::GREEN(), ColorBW::GREEN());
+        $this->assertTrue(ColorBW::GREEN()->equals(ColorBW::GREEN()));
+        $this->assertFalse(ColorBW::GREEN()->equals(ColorBW::RED()));
     }
 
     public function testIsBlue()
     {
-        $this->assertEquals(ColorBW::BLUE, ColorBW::blue()->value());
-        $this->assertTrue(ColorBW::blue()->isBlue());
-        $this->assertFalse(ColorBW::blue()->isRed());
+        $this->assertEquals(ColorBW::BLUE, ColorBW::BLUE()->value());
+        $this->assertEquals(ColorBW::BLUE(), ColorBW::BLUE());
+        $this->assertTrue(ColorBW::BLUE()->equals(ColorBW::BLUE()));
+        $this->assertFalse(ColorBW::BLUE()->equals(ColorBW::RED()));
     }
 
     public function testIsBlack()
     {
-        $this->assertEquals(ColorBW::BLACK, ColorBW::black()->value());
-        $this->assertTrue(ColorBW::black()->isBlack());
-        $this->assertFalse(ColorBW::black()->isRed());
+        $this->assertEquals(ColorBW::BLACK, ColorBW::BLACK()->value());
+        $this->assertEquals(ColorBW::BLACK(), ColorBW::BLACK());
+        $this->assertTrue(ColorBW::BLACK()->equals(ColorBW::BLACK()));
+        $this->assertFalse(ColorBW::BLACK()->equals(ColorBW::RED()));
     }
 
     public function testIsWhite()
     {
-        $this->assertEquals(ColorBW::WHITE, ColorBW::white()->value());
-        $this->assertTrue(ColorBW::white()->isWhite());
-        $this->assertFalse(ColorBW::white()->isRed());
+        $this->assertEquals(ColorBW::WHITE, ColorBW::WHITE()->value());
+        $this->assertEquals(ColorBW::WHITE(), ColorBW::WHITE());
+        $this->assertTrue(ColorBW::WHITE()->equals(ColorBW::WHITE()));
+        $this->assertFalse(ColorBW::WHITE()->equals(ColorBW::RED()));
     }
 
     public function testCreateStatic()
@@ -187,6 +184,6 @@ class ColorTest extends \PHPUnit_Framework_TestCase
         $property->setAccessible(true);
         $property->setValue([]);
 
-        ColorBW::red();
+        ColorBW::RED();
     }
 }

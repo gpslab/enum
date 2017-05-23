@@ -12,13 +12,13 @@ use GpsLab\Component\Enum\Tests\Fixture\Enum\AbcRef;
 
 function test_ref()
 {
-    $a = AbcRef::a();
-    $a->isA();
+    $a = AbcRef::A();
+    $a->equals(AbcRef::A());
 
-    $b = AbcRef::b();
-    $b->isA();
+    $b = AbcRef::B();
+    $b->equals(AbcRef::A());
 
-    $c = AbcRef::c();
+    $c = AbcRef::C();
     $z = (string) $c;
 
     AbcRef::choices();
@@ -29,8 +29,6 @@ function clear_ref()
 {
     reset_class('GpsLab\Component\Enum\ReflectionEnum', [
         'instances',
-        'create_methods',
-        'is_methods',
         'constants',
     ]);
 }

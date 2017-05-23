@@ -13,12 +13,9 @@ namespace GpsLab\Component\Enum\Tests\Fixture\Enum;
 use GpsLab\Component\Enum\ReflectionEnum;
 
 /**
- * @method static AbcRef a()
- * @method static AbcRef b()
- * @method static AbcRef c()
- * @method bool isA()
- * @method bool isB()
- * @method bool isC()
+ * @method static AbcRef A()
+ * @method static AbcRef B()
+ * @method static AbcRef C()
  * @method static AbcRef byValue($value)
  */
 class AbcRef extends ReflectionEnum

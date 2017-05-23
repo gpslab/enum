@@ -50,14 +50,12 @@ var_dump($jan === Month::JANUARY); // false
 var_dump($jan ==  Fruit::APPLE);   // true
 ```
 
-This library is support [PSR-2](http://www.php-fig.org/psr/psr-2/).
-
 ### Benchmark
 
 Enum benchmark on PHP 7.1
 
 ```
-$ tests/benchmark/enum_rival.php 100000
+$ tests/benchmark/enum.php 100000
 Reflection enum: 2.00 MiB - 608 ms
 Reflection enum no magic: 2.00 MiB - 663 ms
 MyClabs enum: 2.00 MiB - 1010 ms
@@ -65,6 +63,12 @@ MarcMabe enum: 2.00 MiB - 652 ms
 MarcMabe enum no magic: 2.00 MiB - 714 ms
 HappyTypes enum: 2.00 MiB - 607 ms
 Explicit enum: 2.00 MiB - 509 ms
+```
+
+Set benchmark on PHP 7.1
+
+```
+$ tests/benchmark/set.php 100000
 ```
 
 ### How to get enum with default value?

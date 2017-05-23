@@ -11,12 +11,9 @@ namespace GpsLab\Component\Enum\Tests\Fixture\Enum;
 use GpsLab\Component\Enum\ReflectionEnum;
 
 /**
- * @method static ColorRGB red()
- * @method static ColorRGB green()
- * @method static ColorRGB blue()
- * @method bool isRed()
- * @method bool isGreen()
- * @method bool isBlue()
+ * @method static ColorRGB RED()
+ * @method static ColorRGB GREEN()
+ * @method static ColorRGB BLUE()
  * @method static ColorRGB byValue($value)
  */
 class ColorRGB extends ReflectionEnum
