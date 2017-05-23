@@ -56,19 +56,31 @@ Enum benchmark on PHP 7.1
 
 ```
 $ tests/benchmark/enum.php 100000
-Reflection enum: 2.00 MiB - 608 ms
-Reflection enum no magic: 2.00 MiB - 663 ms
-MyClabs enum: 2.00 MiB - 1010 ms
-MarcMabe enum: 2.00 MiB - 652 ms
-MarcMabe enum no magic: 2.00 MiB - 714 ms
-HappyTypes enum: 2.00 MiB - 607 ms
-Explicit enum: 2.00 MiB - 509 ms
+
+ ------------------------------- ------------ --------------
+  Test                            Memory Avg   Duration All
+ ------------------------------- ------------ --------------
+  Reflection enum                 3.29 KiB     2091 ms
+  Reflection enum (no magic)      3.29 KiB     2157 ms
+  Explicit enum                   0.77 KiB     859 ms
+  myclabs/php-enum                0.73 KiB     1770 ms
+  marc-mabe/php-enum              1.70 KiB     2291 ms
+  marc-mabe/php-enum (no magic)   1.70 KiB     1978 ms
+  happy-types/enumerable-type     1.82 KiB     2240 ms
+ ------------------------------- ------------ --------------
 ```
 
 Set benchmark on PHP 7.1
 
 ```
 $ tests/benchmark/set.php 100000
+
+ -------------------- ------------ --------------
+  Test                 Memory Avg   Duration All
+ -------------------- ------------ --------------
+  Reflection set       1.47 KiB     1282 ms
+  marc-mabe/php-enum   1.70 KiB     2782 ms
+ -------------------- ------------ --------------
 ```
 
 ### How to get enum with default value?
