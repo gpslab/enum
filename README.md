@@ -86,7 +86,7 @@ $ tests/benchmark/set.php 100000
 ### How to get enum with default value?
 
 ```php
-final class Color extends ReflectionEnum
+final class Color extends ReflectionEnum implements EnumDefault
 {
     const RED = 1;
     const GREEN = 2;
