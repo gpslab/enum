@@ -52,7 +52,7 @@ var_dump($jan ==  Fruit::APPLE);   // true
 
 ### Benchmark
 
-Enum benchmark on PHP 7.1
+Enum benchmark on PHP 7
 
 ```
 $ tests/benchmark/enum.php 100000
@@ -60,17 +60,17 @@ $ tests/benchmark/enum.php 100000
  ------------------------------- ------------ --------------
   Test                            Memory Avg   Duration All
  ------------------------------- ------------ --------------
-  Reflection enum                 1.63 KiB     1813 ms
-  Reflection enum (no magic)      1.63 KiB     1762 ms
-  Explicit enum                   0.77 KiB     796 ms
-  myclabs/php-enum                0.73 KiB     1751 ms
-  marc-mabe/php-enum              1.70 KiB     2310 ms
-  marc-mabe/php-enum (no magic)   1.70 KiB     1994 ms
-  happy-types/enumerable-type     1.82 KiB     2182 ms
+  Reflection enum                 1.52 KiB     1820 ms
+  Reflection enum (no magic)      1.52 KiB     1718 ms
+  Explicit enum                   0.71 KiB     959 ms
+  myclabs/php-enum                0.68 KiB     1971 ms
+  marc-mabe/php-enum              1.59 KiB     2219 ms
+  marc-mabe/php-enum (no magic)   1.59 KiB     1969 ms
+  happy-types/enumerable-type     1.81 KiB     2322 ms
  ------------------------------- ------------ --------------
 ```
 
-Set benchmark on PHP 7.1
+Set benchmark on PHP 7
 
 ```
 $ tests/benchmark/set.php 100000
@@ -78,8 +78,8 @@ $ tests/benchmark/set.php 100000
  -------------------- ------------ --------------
   Test                 Memory Avg   Duration All
  -------------------- ------------ --------------
-  Reflection set       1.47 KiB     1209 ms
-  marc-mabe/php-enum   1.70 KiB     2716 ms
+  Reflection set       1.36 KiB     1238 ms
+  marc-mabe/php-enum   1.59 KiB     2861 ms
  -------------------- ------------ --------------
 ```
 
