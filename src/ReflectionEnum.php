@@ -76,7 +76,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
         self::constants();
 
         if (!isset(self::$constants[$class][$name])) {
-            throw OutOfEnumException::undefinedConstant($class . '::' . $name);
+            throw OutOfEnumException::undefinedConstant($class.'::'.$name);
         }
 
         return self::$instances[$class][$name] = new static(self::$constants[$class][$name]);

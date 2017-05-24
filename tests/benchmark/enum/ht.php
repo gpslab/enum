@@ -7,7 +7,6 @@
  * @copyright Copyright (c) 2011, Peter Gribanov
  * @license   http://opensource.org/licenses/MIT
  */
-
 use GpsLab\Component\Enum\Tests\Fixture\Enum\Rival\AbcHappyTypes;
 
 function test_ht()
