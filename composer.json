@@ -4,6 +4,11 @@
     "type": "library",
     "homepage": "https://github.com/gpslab/enum",
     "description": "Simple and fast implementation of enumerations",
+    "keywords": [
+        "set",
+        "enum",
+        "enumeration"
+    ],
     "autoload": {
         "psr-4": {
             "GpsLab\\Component\\Enum\\": "src/"
