@@ -5,6 +5,10 @@ sudo: false
 notifications:
     email: deploy@peter-gribanov.ru
 
+branches:
+    except:
+        - /^analysis-.*$/
+
 matrix:
     fast_finish: true
     include:
