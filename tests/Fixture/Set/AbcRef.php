@@ -15,7 +15,9 @@ use GpsLab\Component\Enum\Set;
 class AbcRef extends Set
 {
     const A = 1;
+
     const B = 2;
+
     const C = 3;
 
     /**
