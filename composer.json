@@ -16,7 +16,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "GpsLab\\Component\\Enum\\Tests\\": "tests/"
+            "GpsLab\\Component\\Enum\\Tests\\": "tests/",
+            "GpsLab\\Component\\Enum\\Bench\\": "benchmarks/"
         }
     },
     "require": {
