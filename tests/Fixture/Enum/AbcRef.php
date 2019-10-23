@@ -22,7 +22,9 @@ use GpsLab\Component\Enum\ReflectionEnum;
 class AbcRef extends ReflectionEnum
 {
     const A = 1;
+
     const B = 2;
+
     const C = 3;
 
     /**

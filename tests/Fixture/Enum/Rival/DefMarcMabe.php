@@ -20,7 +20,9 @@ use MabeEnum\Enum;
 class DefMarcMabe extends Enum
 {
     const D = 1;
+
     const E = 2;
+
     const F = 3;
 
     /**

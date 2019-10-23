@@ -17,10 +17,10 @@ abstract class ReflectionEnum implements Enum, \Serializable
     /**
      * @var mixed
      */
-    private $value = '';
+    private $value;
 
     /**
-     * @var Enum[]
+     * @var self[]
      */
     private static $instances = [];
 
@@ -40,7 +40,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
     /**
      * @param mixed $value
      *
-     * @return Enum
+     * @return self
      */
     final public static function byValue($value)
     {
@@ -64,7 +64,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
     /**
      * @param string $name
      *
-     * @return Enum
+     * @return self
      */
     final public static function byName($name)
     {
@@ -93,7 +93,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
     /**
      * Available values.
      *
-     * @return Enum[]
+     * @return self[]
      */
     final public static function values()
     {
@@ -110,7 +110,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     final public function name()
     {
-        return array_search($this->value(), self::constants());
+        return array_search($this->value(), self::constants(), true);
     }
 
     /**
@@ -120,7 +120,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      */
     final public function equals(Enum $enum)
     {
-        return $this === $enum || ($this->value() === $enum->value() && get_called_class() == get_class($enum));
+        return $this === $enum || ($this->value() === $enum->value() && get_called_class() === get_class($enum));
     }
 
     /**
@@ -193,7 +193,7 @@ abstract class ReflectionEnum implements Enum, \Serializable
      * @param string $method
      * @param array  $arguments
      *
-     * @return Enum
+     * @return self
      */
     public static function __callStatic($method, array $arguments = [])
     {
