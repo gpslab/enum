@@ -16,7 +16,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "GpsLab\\Component\\Enum\\Tests\\": "tests/"
+            "GpsLab\\Component\\Enum\\Tests\\": "tests/",
+            "GpsLab\\Component\\Enum\\Bench\\": "benchmarks/"
         }
     },
     "require": {
@@ -29,6 +30,7 @@
         "marc-mabe/php-enum": "~2.3",
         "happy-types/enumerable-type": "~1.0",
         "scrutinizer/ocular": "~1.3",
-        "satooshi/php-coveralls": "^1.0"
+        "satooshi/php-coveralls": "^1.0",
+        "phpbench/phpbench": "~0.12"
     }
 }
