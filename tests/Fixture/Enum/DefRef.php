@@ -22,7 +22,9 @@ use GpsLab\Component\Enum\ReflectionEnum;
 class DefRef extends ReflectionEnum
 {
     const D = 4;
+
     const E = 5;
+
     const F = 6;
 
     /**

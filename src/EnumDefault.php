@@ -11,7 +11,7 @@ namespace GpsLab\Component\Enum;
 interface EnumDefault extends Enum
 {
     /**
-     * @return EnumDefault
+     * @return self
      */
     public static function byDefault();
 }

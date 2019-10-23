@@ -15,7 +15,9 @@ use GpsLab\Component\Enum\ExplicitEnum;
 class AbcExp extends ExplicitEnum
 {
     const A = 1;
+
     const B = 2;
+
     const C = 3;
 
     /**

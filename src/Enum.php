@@ -32,11 +32,11 @@ interface Enum
     public static function values();
 
     /**
-     * @param Enum $enum
+     * @param self $enum
      *
      * @return bool
      */
-    public function equals(Enum $enum);
+    public function equals(self $enum);
 
     /**
      * Get choices for radio group.

@@ -20,5 +20,6 @@ namespace GpsLab\Component\Enum\Tests\Fixture\Enum;
 class ColorBW extends ColorRGB
 {
     const BLACK = 4;
+
     const WHITE = 5;
 }

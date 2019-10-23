@@ -104,7 +104,7 @@ class Set
      *
      * @return bool
      */
-    final public function equal(Set $set)
+    final public function equal(self $set)
     {
         self::validateType($set);
 
@@ -118,7 +118,7 @@ class Set
      *
      * @return bool
      */
-    final public function subset(Set $set)
+    final public function subset(self $set)
     {
         self::validateType($set);
 
@@ -132,7 +132,7 @@ class Set
      *
      * @return bool
      */
-    final public function superset(Set $set)
+    final public function superset(self $set)
     {
         self::validateType($set);
 
@@ -146,13 +146,13 @@ class Set
      *
      * @return Set
      */
-    final public function union(Set $set)
+    final public function union(self $set)
     {
         $bit = $this->bit;
-        foreach (func_get_args() as $set) {
-            self::validateType($set);
+        foreach (func_get_args() as $arg) {
+            self::validateType($arg);
 
-            $bit |= $set->bit;
+            $bit |= $arg->bit;
         }
 
         $clone = new static();
@@ -168,13 +168,13 @@ class Set
      *
      * @return Set
      */
-    final public function intersect(Set $set)
+    final public function intersect(self $set)
     {
         $bit = $this->bit;
-        foreach (func_get_args() as $set) {
-            self::validateType($set);
+        foreach (func_get_args() as $arg) {
+            self::validateType($arg);
 
-            $bit &= $set->bit;
+            $bit &= $arg->bit;
         }
 
         $clone = new static();
@@ -190,13 +190,13 @@ class Set
      *
      * @return Set
      */
-    final public function diff(Set $set)
+    final public function diff(self $set)
     {
         $bit = 0;
-        foreach (func_get_args() as $set) {
-            self::validateType($set);
+        foreach (func_get_args() as $arg) {
+            self::validateType($arg);
 
-            $bit |= $set->bit;
+            $bit |= $arg->bit;
         }
 
         $clone = new static();
@@ -212,13 +212,13 @@ class Set
      *
      * @return Set
      */
-    final public function symDiff(Set $set)
+    final public function symDiff(self $set)
     {
         $bit = 0;
-        foreach (func_get_args() as $set) {
-            self::validateType($set);
+        foreach (func_get_args() as $arg) {
+            self::validateType($arg);
 
-            $bit |= $set->bit;
+            $bit |= $arg->bit;
         }
 
         $clone = new static();
@@ -310,7 +310,7 @@ class Set
      */
     private function bit($value)
     {
-        return array_search($value, self::bits());
+        return array_search($value, self::bits(), true);
     }
 
     /**
