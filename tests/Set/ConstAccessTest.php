@@ -11,8 +11,9 @@
 namespace GpsLab\Component\Enum\Tests\Set;
 
 use GpsLab\Component\Enum\Tests\Fixture\Set\ConstAccess;
+use PHPUnit\Framework\TestCase;
 
-class ConstAccessTest extends \PHPUnit_Framework_TestCase
+class ConstAccessTest extends TestCase
 {
     public function testChoices()
     {
