@@ -11,8 +11,9 @@
 namespace GpsLab\Component\Enum\Tests\Enum;
 
 use GpsLab\Component\Enum\Tests\Fixture\Enum\ColorBW;
+use PHPUnit\Framework\TestCase;
 
-class ColorTest extends \PHPUnit_Framework_TestCase
+class ColorTest extends TestCase
 {
     /**
      * @var array

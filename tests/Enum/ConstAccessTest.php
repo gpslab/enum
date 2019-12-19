@@ -11,8 +11,9 @@
 namespace GpsLab\Component\Enum\Tests\Enum;
 
 use GpsLab\Component\Enum\Tests\Fixture\Enum\ConstAccess;
+use PHPUnit\Framework\TestCase;
 
-class ConstAccessTest extends \PHPUnit_Framework_TestCase
+class ConstAccessTest extends TestCase
 {
     /**
      * @var array
@@ -24,7 +25,7 @@ class ConstAccessTest extends \PHPUnit_Framework_TestCase
      */
     private $names = [];
 
-    public function setUp()
+    protected function setUp()
     {
         if (PHP_VERSION_ID < 70100) {
             $this->markTestSkipped('This test is for PHP-7.1 and upper only');

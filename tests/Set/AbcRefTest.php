@@ -12,8 +12,9 @@ namespace GpsLab\Component\Enum\Tests\Set;
 
 use GpsLab\Component\Enum\Tests\Fixture\Set\AbcRef;
 use GpsLab\Component\Enum\Tests\Fixture\Set\DefRef;
+use PHPUnit\Framework\TestCase;
 
-class AbcRefTest extends \PHPUnit_Framework_TestCase
+class AbcRefTest extends TestCase
 {
     /**
      * @var array
